@@ -64,6 +64,7 @@ return [
                     ['Dua Umschrift', 'dua_umschrift'],
                     ['Dua Übersetzung', 'dua_translation'],
                     ['Hinweis', 'hinweis'],
+                    ['Quelle', 'quelle'],
                 ],
             ],
         ],
