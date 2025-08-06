@@ -7,49 +7,49 @@
         </header>
         <body>
 
-            <!-- Kapitel -->
+            <!-- Chapter -->
             <trans-unit id="tx_hisnulmuslim_chapter">
-                <source>Kapitel</source>
+                <source>Chapter</source>
             </trans-unit>
             <trans-unit id="tx_hisnulmuslim_chapter.id">
-                <source>Kapitel-ID</source>
+                <source>Chapter-ID</source>
             </trans-unit>
             <trans-unit id="tx_hisnulmuslim_chapter.title">
-                <source>Titel</source>
+                <source>Title</source>
             </trans-unit>
             <trans-unit id="tx_hisnulmuslim_chapter.title_ar">
-                <source>Titel (Arabisch)</source>
+                <source>Title (Arabic)</source>
             </trans-unit>
             <trans-unit id="tx_hisnulmuslim_chapter.duas">
-                <source>Bittgebete</source>
+                <source>Prayers</source>
             </trans-unit>
 
             <!-- Dua -->
             <trans-unit id="tx_hisnulmuslim_dua">
-                <source>Bittgebet</source>
+                <source>Prayer</source>
             </trans-unit>
             <trans-unit id="tx_hisnulmuslim_dua.dua_id">
-                <source>Bittgebet-ID</source>
+                <source>Prayer ID</source>
             </trans-unit>
             <trans-unit id="tx_hisnulmuslim_dua.chapter">
-                <source>Kapitel</source>
+                <source>Chapter</source>
             </trans-unit>
             <trans-unit id="tx_hisnulmuslim_dua.items">
-                <source>Elemente</source>
+                <source>Elements</source>
             </trans-unit>
 
             <!-- Dua Item -->
             <trans-unit id="tx_hisnulmuslim_dua_item">
-                <source>Bittgebet-Element</source>
+                <source>Prayer Element</source>
             </trans-unit>
             <trans-unit id="tx_hisnulmuslim_dua_item.type">
-                <source>Element-Typ</source>
+                <source>Element Type</source>
             </trans-unit>
             <trans-unit id="tx_hisnulmuslim_dua_item.content">
-                <source>Inhalt</source>
+                <source>Content</source>
             </trans-unit>
             <trans-unit id="tx_hisnulmuslim_dua_item.dua">
-                <source>Bittgebet</source>
+                <source>Prayer</source>
             </trans-unit>
 
         </body>
