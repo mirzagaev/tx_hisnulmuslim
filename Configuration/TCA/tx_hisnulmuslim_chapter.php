@@ -19,8 +19,12 @@ return [
     'types' => [
         '0' => [
             'showitem' => '
-                sys_language_uid, l10n_parent, hidden,
-                chapter_id, title, title_ar, duas
+                --div--;Allgemein,
+                    --palette--;;language, --palette--;;visibility, chapter_id, title, title_ar,
+                --div--;Bittgebete,
+                    duas,
+                --div--;Kategorie,
+                    categories
             '
         ],
     ],
@@ -85,5 +89,24 @@ return [
                 ],
             ],
         ],
+        'categories' => [
+            'label' => 'Kategorien',
+            'config' => [
+                'type' => 'select',
+                'renderType' => 'selectMultipleSideBySide',
+                'foreign_table' => 'sys_category',
+                'MM' => 'tx_hisnulmuslim_chapter_category_mm',
+                'size' => 5,
+                'autoSizeMax' => 20,
+                'multiple' => 0,
+                'maxitems' => 999,
+                'wizards' => [
+                '_PADDING' => 1,
+                'suggest' => [
+                    'type' => 'suggest',
+                ],
+                ],
+            ],
+        ]
     ],
 ];
