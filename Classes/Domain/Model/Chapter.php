@@ -64,6 +64,22 @@ class Chapter extends AbstractEntity
         $this->titleAr = $titleAr;
     }
 
+    /**
+     * @param ObjectStorage<Dua> $duas
+     */
+    public function setDuas(ObjectStorage $duas): void
+    {
+        $this->duas = $duas;
+    }
+
+    /**
+     * @return ObjectStorage<Dua>
+     */
+    public function getDuas(): ?ObjectStorage
+    {
+        return $this->duas;
+    }
+
     public function addDua(Dua $dua): void
     {
         $this->duas->attach($dua);
@@ -72,13 +88,5 @@ class Chapter extends AbstractEntity
     public function removeDua(Dua $dua): void
     {
         $this->duas->detach($dua);
-    }
-
-    /**
-     * @return ObjectStorage<Dua>
-     */
-    public function getDuas(): ObjectStorage
-    {
-        return $this->duas;
     }
 }
