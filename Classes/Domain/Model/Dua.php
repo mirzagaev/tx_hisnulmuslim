@@ -14,6 +14,11 @@ class Dua extends AbstractEntity
      */
     protected $items;
 
+    /**
+     * @var Chapter|null
+     */
+    protected $chapter = null;
+
     public function __construct()
     {
         $this->items = new ObjectStorage();
@@ -45,5 +50,15 @@ class Dua extends AbstractEntity
     public function getItems(): ObjectStorage
     {
         return $this->items;
+    }
+    
+    public function getChapter(): ?Chapter
+    {
+        return $this->chapter;
+    }
+
+    public function setChapter(?Chapter $chapter): void
+    {
+        $this->chapter = $chapter;
     }
 }

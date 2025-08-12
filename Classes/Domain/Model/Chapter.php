@@ -7,6 +7,7 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 class Chapter extends AbstractEntity
 {
+    protected string $chapter_id;
     protected string $title = '';
     protected string $titleAr = '';
 
@@ -15,7 +16,7 @@ class Chapter extends AbstractEntity
      * @var ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\Category>
      * @TYPO3\CMS\Extbase\Annotation\ORM\Cascade("remove")
      */
-    protected $duas;
+    protected ObjectStorage $duas;
     protected $categories;
 
     public function __construct()
@@ -44,6 +45,16 @@ class Chapter extends AbstractEntity
         $this->categories = $categories;
     }
 
+    public function getChapter_id(): int
+    {
+        return $this->chapter_id;
+    }
+
+    public function setChapter_id(int $chapter_id): void
+    {
+        $this->chapter_id = $chapter_id;
+    }
+
     public function getTitle(): string
     {
         return $this->title;
@@ -65,19 +76,19 @@ class Chapter extends AbstractEntity
     }
 
     /**
+     * @return ObjectStorage<Dua>
+     */
+    public function getDuas(): ObjectStorage
+    {
+        return $this->duas;
+    }
+
+    /**
      * @param ObjectStorage<Dua> $duas
      */
     public function setDuas(ObjectStorage $duas): void
     {
         $this->duas = $duas;
-    }
-
-    /**
-     * @return ObjectStorage<Dua>
-     */
-    public function getDuas(): ?ObjectStorage
-    {
-        return $this->duas;
     }
 
     public function addDua(Dua $dua): void

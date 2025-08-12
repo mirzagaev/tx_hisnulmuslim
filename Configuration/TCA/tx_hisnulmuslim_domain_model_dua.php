@@ -57,7 +57,11 @@ return [
             'exclude' => true,
             'label' => 'Kapitel',
             'config' => [
-                'type' => 'passthrough',
+                'type' => 'select',
+                'renderType' => 'selectSingle',
+                'foreign_table' => 'tx_hisnulmuslim_domain_model_chapter',
+                'maxitems' => 1,
+                'default' => 0,
             ],
         ],
         'items' => [

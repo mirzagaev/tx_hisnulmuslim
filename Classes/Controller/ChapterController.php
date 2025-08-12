@@ -5,6 +5,7 @@ namespace Webzadev\Hisnulmuslim\Controller;
 
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+use Webzadev\Hisnulmuslim\Domain\Model\Chapter;
 use Webzadev\Hisnulmuslim\Domain\Repository\ChapterRepository;
 
 class ChapterController extends ActionController
@@ -42,11 +43,12 @@ class ChapterController extends ActionController
     /**
      * Show action
      *
-     * @param \Webzadev\Hisnulmuslim\Domain\Model\Chapter $chapter The chapter to be shown
+     * @param Chapter $chapter The chapter to be shown
      * @return string The rendered HTML string
      */
-    public function showAction(\Webzadev\Hisnulmuslim\Domain\Model\Chapter $chapter)
+    public function showAction(Chapter $chapter): ResponseInterface
     {
         $this->view->assign('chapter', $chapter);
+        return $this->htmlResponse();
     }
 }
