@@ -1,5 +1,5 @@
 <?php
-namespace Vendor\Hisnulmuslim\Domain\Model;
+namespace Webzadev\Hisnulmuslim\Domain\Model;
 
 use TYPO3\CMS\Extbase\Domain\Model\Category;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;

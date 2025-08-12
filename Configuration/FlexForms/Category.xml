@@ -1,0 +1,35 @@
+<T3DataStructure>
+  <sheets>
+    <sDEF>
+      <ROOT>
+        <TCEforms>
+          <sheetTitle>Plugin-Einstellungen</sheetTitle>
+        </TCEforms>
+        <el>
+          <settings.categoryPid>
+            <TCEforms>
+              <label>Kategorie PID</label>
+              <config>
+                <type>input</type>
+                <eval>int</eval>
+              </config>
+            </TCEforms>
+          </settings.categoryPid>
+          <settings.targetPageUid>
+            <TCEforms>
+              <label>Zielseite (Detailansicht)</label>
+              <config>
+                <type>group</type>
+                <internal_type>db</internal_type>
+                <allowed>pages</allowed>
+                <size>1</size>
+                <maxitems>1</maxitems>
+                <minitems>0</minitems>
+              </config>
+            </TCEforms>
+          </settings.targetPageUid>
+        </el>
+      </ROOT>
+    </sDEF>
+  </sheets>
+</T3DataStructure>
