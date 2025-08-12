@@ -20,8 +20,8 @@
             <trans-unit id="tx_hisnulmuslim_chapter.title_ar">
                 <source>Titel (Arabisch)</source>
             </trans-unit>
-            <trans-unit id="tx_hisnulmuslim_chapter.duas">
-                <source>Bittgebete</source>
+            <trans-unit id="tx_hisnulmuslim_chapter.dua">
+                <source>Bittgebet</source>
             </trans-unit>
 
             <!-- Dua -->

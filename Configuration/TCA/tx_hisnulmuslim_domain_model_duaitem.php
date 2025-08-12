@@ -1,8 +1,8 @@
 <?php
 return [
     'ctrl' => [
-        'title' => 'LLL:EXT:hisnulmuslim/Resources/Private/Language/locallang_db.xlf:tx_hisnulmuslim_dua',
-        'label' => 'dua_id',
+        'title' => 'LLL:EXT:hisnulmuslim/Resources/Private/Language/locallang_db.xlf:tx_hisnulmuslim_dua_item',
+        'label' => 'type',
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
         'cruser_id' => 'cruser_id',
@@ -19,7 +19,7 @@ return [
         '0' => [
             'showitem' => '
                 sys_language_uid, l10n_parent, hidden,
-                dua_id, chapter, items
+                type, content
             '
         ],
     ],
@@ -44,38 +44,36 @@ return [
                 'type' => 'check',
             ],
         ],
-        'dua_id' => [
-            'exclude' => false,
-            'label' => 'LLL:EXT:hisnulmuslim/Resources/Private/Language/locallang_db.xlf:tx_hisnulmuslim_dua.dua_id',
+        'dua' => [
+            'exclude' => true,
+            'label' => 'Bittgebet',
             'config' => [
-                'type' => 'input',
-                'eval' => 'int,required',
-                'size' => 10,
+                'type' => 'passthrough',
             ],
         ],
-        'chapter' => [
-            'exclude' => true,
-            'label' => 'Kapitel',
+        'type' => [
+            'exclude' => false,
+            'label' => 'Typ',
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
-                'foreign_table' => 'tx_hisnulmuslim_domain_model_chapter',
-                'maxitems' => 1,
-                'default' => 0,
+                'items' => [
+                    ['Arabisch', 'ar'],
+                    ['Arabisch Übersetzung', 'ar_translation'],
+                    ['Dua', 'dua'],
+                    ['Dua Umschrift', 'dua_umschrift'],
+                    ['Dua Übersetzung', 'dua_translation'],
+                    ['Hinweis', 'hinweis'],
+                    ['Quelle', 'quelle'],
+                ],
             ],
         ],
-        'items' => [
-            'exclude' => true,
-            'label' => 'Elemente',
+        'content' => [
+            'exclude' => false,
+            'label' => 'Inhalt',
             'config' => [
-                'type' => 'inline',
-                'foreign_table' => 'tx_hisnulmuslim_domain_model_duaitem',
-                'foreign_field' => 'dua',
-                'appearance' => [
-                    'collapseAll' => 1,
-                    'newRecordLinkAddTitle' => true,
-                    'useSortable' => true,
-                ],
+                'type' => 'text',
+                'enableRichtext' => true,
             ],
         ],
     ],

@@ -4,5 +4,5 @@ CREATE TABLE tx_hisnulmuslim_domain_model_chapter (
 CREATE TABLE tx_hisnulmuslim_domain_model_dua (
 );
 
-CREATE TABLE tx_hisnulmuslim_domain_model_dua_item (
+CREATE TABLE tx_hisnulmuslim_domain_model_duaitem (
 );

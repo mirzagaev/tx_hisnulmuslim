@@ -1,1 +1,12 @@
-<h1>{chapter.title}</h1>
+<div class="tx-hisnulmuslim-show">
+    <h1>{chapter.title}</h1>
+    <f:for each="{chapter.dua}" as="dua">
+    <div class="tx-hisnulmuslim-dua">
+        <f:for each="{dua.items}" as="item">
+        <div class="tx-hisnulmuslim-duaitem">
+            <div class="tx-hisnulmuslim-duaitem-{item-type}">{item.content -> f:format.raw()}</div>
+        </div>
+        </f:for>
+    </div>
+    </f:for>
+</div>

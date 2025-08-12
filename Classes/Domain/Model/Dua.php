@@ -3,6 +3,7 @@ namespace Webzadev\Hisnulmuslim\Domain\Model;
 
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
+use \Webzadev\Hisnulmuslim\Domain\Model\DuaItem;
 
 class Dua extends AbstractEntity
 {

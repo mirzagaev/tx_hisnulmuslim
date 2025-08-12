@@ -22,7 +22,7 @@ return [
                 --div--;Allgemein,
                     --palette--;;language, --palette--;;visibility, chapter_id, title, title_ar,
                 --div--;Bittgebete,
-                    duas,
+                    dua,
                 --div--;Kategorie,
                     categories
             '
@@ -75,9 +75,9 @@ return [
                 'enableRichtext' => true,
             ],
         ],
-        'duas' => [
+        'dua' => [
             'exclude' => true,
-            'label' => 'LLL:EXT:hisnulmuslim/Resources/Private/Language/locallang_db.xlf:tx_hisnulmuslim_chapter.duas',
+            'label' => 'LLL:EXT:hisnulmuslim/Resources/Private/Language/locallang_db.xlf:tx_hisnulmuslim_chapter.dua',
             'config' => [
                 'type' => 'inline',
                 'foreign_table' => 'tx_hisnulmuslim_domain_model_dua',

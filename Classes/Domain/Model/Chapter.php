@@ -1,27 +1,32 @@
 <?php
 namespace Webzadev\Hisnulmuslim\Domain\Model;
 
+use \Webzadev\Hisnulmuslim\Domain\Model\Dua;
 use TYPO3\CMS\Extbase\Domain\Model\Category;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 class Chapter extends AbstractEntity
 {
-    protected string $chapter_id;
+    protected int $chapterId = 0;
     protected string $title = '';
     protected string $titleAr = '';
 
     /**
      * @var ObjectStorage<Dua>
+     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
+     */
+    protected ObjectStorage $dua;
+
+    /**
      * @var ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\Category>
      * @TYPO3\CMS\Extbase\Annotation\ORM\Cascade("remove")
      */
-    protected ObjectStorage $duas;
-    protected $categories;
+    protected ObjectStorage $categories;
 
     public function __construct()
     {
-        $this->duas = new ObjectStorage();
+        $this->dua = new ObjectStorage();
         $this->categories = new ObjectStorage();
     }
 
@@ -45,14 +50,14 @@ class Chapter extends AbstractEntity
         $this->categories = $categories;
     }
 
-    public function getChapter_id(): int
+    public function getChapterId(): int
     {
-        return $this->chapter_id;
+        return $this->chapterId;
     }
 
-    public function setChapter_id(int $chapter_id): void
+    public function setChapterId(int $chapterId): void
     {
-        $this->chapter_id = $chapter_id;
+        $this->chapterId = $chapterId;
     }
 
     public function getTitle(): string
@@ -75,29 +80,25 @@ class Chapter extends AbstractEntity
         $this->titleAr = $titleAr;
     }
 
-    /**
-     * @return ObjectStorage<Dua>
-     */
-    public function getDuas(): ObjectStorage
+    /** @return ObjectStorage<Dua> */
+    public function getDua(): ObjectStorage
     {
-        return $this->duas;
+        return $this->dua;
     }
 
-    /**
-     * @param ObjectStorage<Dua> $duas
-     */
-    public function setDuas(ObjectStorage $duas): void
+    /** @param ObjectStorage<Dua> $dua */
+    public function setDua(ObjectStorage $dua): void
     {
-        $this->duas = $duas;
+        $this->dua = $dua;
     }
 
     public function addDua(Dua $dua): void
     {
-        $this->duas->attach($dua);
+        $this->dua->attach($dua);
     }
 
     public function removeDua(Dua $dua): void
     {
-        $this->duas->detach($dua);
+        $this->dua->detach($dua);
     }
 }
