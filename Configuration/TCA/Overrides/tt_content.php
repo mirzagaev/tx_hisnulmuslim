@@ -21,6 +21,14 @@ defined('TYPO3') or die();
     );
 })();
 
+ExtensionUtility::registerPlugin(
+    'Hisnulmuslim', // Extension-Key (ohne tx_)
+    'OverviewCategory',          // Plugin-Name (muss identisch mit dem in ext_localconf.php sein)
+    'Gesamtübersicht nach Kategorien',  // Titel, wie er im Backend angezeigt wird
+    'EXT:hisnulmuslim/Resources/Public/Icons/Extension.png',
+    'Hisnul Muslim',
+);
+
 // ExtensionUtility::registerPlugin(
 //     'Hisnulmuslim', // Extension-Key (ohne tx_)
 //     'Api',          // Plugin-Name (muss identisch mit dem in ext_localconf.php sein)

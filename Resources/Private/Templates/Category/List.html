@@ -1,6 +1,6 @@
 <div class="tx-hisnulmuslim-list w-full xl:w-2/3 mx-auto p-5">
-    <h1 class="font-semibold text-4xl my-10">Inhaltsverzeichnis</h1>
-    <f:debug>{chapters}</f:debug>
+    <h1 class="font-semibold text-4xl my-10">Nach Kategorien</h1>
+    <f:debug>{categories}</f:debug>
 
     <div class="border-1 border-neutral-300">
   	<table class="w-full text-left table-auto min-w-max">
@@ -21,22 +21,6 @@
 			</tr>
 		</thead>
 		<tbody>
-            <f:for each="{chapters}" as="chapter">
-            <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200">
-                <td class="px-4 py-2">
-                    {chapter.chapterId}
-                </td>
-                <td class="px-4 py-2">
-                    <f:link.action action="show" arguments="{chapter: chapter}">{chapter.title}</f:link.action>
-                </td>
-                <td class="px-4 py-2">
-                    {chapter.categories.0.title}
-				</td>
-                <td class="px-4 py-2">
-                    {chapter.categories.1.title}
-				</td>
-            </tr>
-            </f:for>
 		</tbody>
 	</table>
 </div>

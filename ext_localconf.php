@@ -3,6 +3,7 @@
 defined('TYPO3') or die('Access denied.');
 
 use Webzadev\Hisnulmuslim\Controller\ChapterController;
+use Webzadev\Hisnulmuslim\Controller\CategoryController;
 use Webzadev\Hisnulmuslim\Controller\ApiController;
 use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
 
@@ -20,6 +21,30 @@ ExtensionUtility::configurePlugin(
         // ChapterController::class => ''
     ]
 );
+
+// Registrierung der Plugins oder Module (bei Bedarf)
+ExtensionUtility::configurePlugin(
+    'Hisnulmuslim',
+    'OverviewCategory',
+    [
+        ChapterController::class => 'bycategory, show'
+    ],
+    [
+        // ChapterController::class => ''
+    ]
+);
+
+// // Registrierung der Plugins oder Module (bei Bedarf)
+// ExtensionUtility::configurePlugin(
+//     'Hisnulmuslim',
+//     'OverviewCategory',
+//     [
+//         CategoryController::class => 'list, show'
+//     ],
+//     [
+//         // ChapterController::class => ''
+//     ]
+// );
 
 // ExtensionUtility::configurePlugin(
 //     'Hisnulmuslim', // <== Dein extKey mit Vendor in composer.json abgleichen

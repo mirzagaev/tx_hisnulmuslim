@@ -139,7 +139,6 @@ page {
     }
 
     includeCSSLibs {
-
     }
 
     includeCSS {
@@ -151,7 +150,7 @@ page {
     }
 
     includeJS {
-
+        tailwindJS = https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4
     }
 
     includeJSFooterlibs {

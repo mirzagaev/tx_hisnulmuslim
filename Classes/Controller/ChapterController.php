@@ -5,6 +5,7 @@ namespace Webzadev\Hisnulmuslim\Controller;
 
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+use Webzadev\Hisnulmuslim\Domain\Repository\CategoryRepository;
 use Webzadev\Hisnulmuslim\Domain\Model\Chapter;
 use Webzadev\Hisnulmuslim\Domain\Repository\ChapterRepository;
 
@@ -27,6 +28,23 @@ class ChapterController extends ActionController
     }
 
     /**
+     * @var CategoryRepository
+     */
+    protected $categoryRepository;
+
+    public function injectCategoryRepository(CategoryRepository $categoryRepository): void
+    {
+        $this->categoryRepository = $categoryRepository;
+    }
+
+    // private CategoryRepository $categoryRepository;
+
+    // public function injectCategoryRepository(CategoryRepository $categoryRepository): void
+    // {
+    //     $this->categoryRepository = $categoryRepository;
+    // }
+
+    /**
      * list Action
      *
      * @return string
@@ -37,6 +55,18 @@ class ChapterController extends ActionController
 
         $this->view->assign('chapters', $chapters);
 
+        return $this->htmlResponse();
+    }
+
+    /**
+     * bycategory Action
+     *
+     * @return string
+     */
+    public function bycategoryAction(): ResponseInterface
+    {
+        $categories = $this->categoryRepository->findAll();
+        $this->view->assign('categories', $categories);
         return $this->htmlResponse();
     }
 
