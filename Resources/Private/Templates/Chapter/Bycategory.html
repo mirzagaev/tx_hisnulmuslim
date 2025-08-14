@@ -1,7 +1,17 @@
 <div class="tx-hisnulmuslim-list w-full xl:w-2/3 mx-auto p-5">
     <f:debug>{categories}</f:debug>
-	<f:for each="{categories}" as="categorie">
-		<h1 class="font-semibold text-4xl my-10">{categorie.title}</h1>
+	<f:for each="{categories}" as="cat">
+		<h1 class="font-semibold text-4xl my-10">{cat.category.uid}) {cat.category.title}</h1>
+		<f:for each="{cat.subcategories}" as="subcat">
+			<h2 class="font-semibold text-2xl my-10">{subcat.subcategory.title}</h2>
+			<ul class="bg-neutral-100 p-5">
+				<f:for each="{subcat.chapters}" as="chapter">
+					<li>
+						<f:link.action action="show" arguments="{chapter: chapter}">#{chapter.chapterId} - {chapter.title}</f:link.action>
+					</li>
+				</f:for>
+			</ul>
+		</f:for>
 	</f:for>
 </div>
 </div>

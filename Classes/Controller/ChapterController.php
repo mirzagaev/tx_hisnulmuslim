@@ -37,13 +37,6 @@ class ChapterController extends ActionController
         $this->categoryRepository = $categoryRepository;
     }
 
-    // private CategoryRepository $categoryRepository;
-
-    // public function injectCategoryRepository(CategoryRepository $categoryRepository): void
-    // {
-    //     $this->categoryRepository = $categoryRepository;
-    // }
-
     /**
      * list Action
      *
@@ -65,9 +58,29 @@ class ChapterController extends ActionController
      */
     public function bycategoryAction(): ResponseInterface
     {
-        $categories = $this->categoryRepository->findAll();
-        $this->view->assign('categories', $categories);
+        $topCategories = $this->categoryRepository->findTopLevel();
+        $categoriesWithChildrenAndChapters = [];
+
+        foreach ($topCategories as $topCategory) {
+            $subcategoriesData = [];
+            $subcategories = $this->categoryRepository->findByParent($topCategory->getUid());
+
+            foreach ($subcategories as $sub) {
+                $subcategoriesData[] = [
+                    'subcategory' => $sub,
+                    'chapters' => $this->chapterRepository->findByCategory($sub->getUid())
+                ];
+            }
+
+            $categoriesWithChildrenAndChapters[] = [
+                'category' => $topCategory,
+                'subcategories' => $subcategoriesData
+            ];
+        }
+
+        $this->view->assign('categories', $categoriesWithChildrenAndChapters);
         return $this->htmlResponse();
+
     }
 
     /**
