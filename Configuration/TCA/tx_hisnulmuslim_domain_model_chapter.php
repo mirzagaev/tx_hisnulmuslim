@@ -13,14 +13,14 @@ return [
             'disabled' => 'hidden',
         ],
         'searchFields' => 'title,title_ar',
-        'sortby' => 'sorting',
+        'sortby' => 'chapter_id',
         'iconfile' => 'EXT:hisnulmuslim/Resources/Public/Icons/Extension.png',
     ],
     'types' => [
         '0' => [
             'showitem' => '
                 --div--;Allgemein,
-                    --palette--;;language, --palette--;;visibility, chapter_id, title, title_ar,
+                    --palette--;;language, --palette--;;visibility, chapter_id, title, title_ar, hidden,
                 --div--;Bittgebete,
                     dua,
                 --div--;Kategorie,

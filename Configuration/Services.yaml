@@ -1,8 +1,17 @@
-# Configuration/Services.yaml
 services:
-  Webzadev\Hisnulmuslim\:
-    resource: '../Classes/*'
+  _defaults:
     autowire: true
     autoconfigure: true
-  Webzadev\Hisnulmuslim\Controller\ApiController:
+    public: false
+
+  # Alle Klassen der Extension als Services
+  Webzadev\Hisnulmuslim\:
+    resource: '../Classes/*'
+    exclude:
+      - '../Classes/Domain/Model/*'
+
+  # Controller müssen public sein und den Controller-Tag haben
+  Webzadev\Hisnulmuslim\Controller\:
+    resource: '../Classes/Controller/*'
     public: true
+    tags: ['controller.service_arguments']

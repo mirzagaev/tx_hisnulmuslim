@@ -29,10 +29,10 @@ ExtensionUtility::registerPlugin(
     'Hisnul Muslim',
 );
 
-// ExtensionUtility::registerPlugin(
-//     'Hisnulmuslim', // Extension-Key (ohne tx_)
-//     'Api',          // Plugin-Name (muss identisch mit dem in ext_localconf.php sein)
-//     'API Ausgabe',  // Titel, wie er im Backend angezeigt wird
-//     'EXT:hisnulmuslim/Resources/Public/Icons/Extension.png',
-//     'Hisnul Muslim',
-// );
+ExtensionUtility::registerPlugin(
+    'Hisnulmuslim', // Extension-Key (ohne tx_)
+    'App',          // Plugin-Name (muss identisch mit dem in ext_localconf.php sein)
+    'App',  // Titel, wie er im Backend angezeigt wird
+    'EXT:hisnulmuslim/Resources/Public/Icons/Extension.png',
+    'Hisnul Muslim',
+);

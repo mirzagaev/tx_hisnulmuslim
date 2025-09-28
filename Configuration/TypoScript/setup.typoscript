@@ -162,7 +162,6 @@ page {
     }
 }
 
-
 ################
 #### CONFIG ####
 ################
@@ -198,4 +197,22 @@ config {
     compressCss = 0
     concatenateJs = 0
     concatenateCss = 0
+}
+
+ajaxApi = PAGE
+ajaxApi {
+  typeNum = 21
+  config {
+    disableAllHeaderCode = 1
+    additionalHeaders.10.header = Content-Type: application/json
+    no_cache = 1
+  }
+
+  10 = USER
+  10 {
+    userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
+    extensionName = Hisnulmuslim
+    pluginName = Api
+    vendorName = Webzadev
+  }
 }

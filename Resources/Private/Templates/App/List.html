@@ -1,0 +1,42 @@
+<style type="text/tailwindcss">
+    .tx-hisnulmuslim-duaitem-dua_translation {
+        @apply font-semibold py-4 px-6 text-lg;
+    } 
+    .tx-hisnulmuslim-duaitem-dua {
+        @apply bg-slate-100 p-5 rounded-xl font-serif text-4xl text-right leading-12;
+    }
+    .tx-hisnulmuslim-duaitem-dua_umschrift {
+        @apply bg-neutral-100 p-5 rounded-xl text-neutral-700 text-sm;
+    }
+</style>
+
+<div class="tx-hisnulmuslim-list w-full xl:w-2/3 mx-auto p-8">
+	<f:for each="{categories}" as="cat">
+		<h1 class="font-semibold text-4xl mb-8">{cat.category.title}</h1>
+		<f:for each="{cat.subcategories}" as="subcat">
+			<h2 class="font-semibold text-2xl my-5">{subcat.subcategory.title}</h2>
+			<ul class="bg-neutral-100 p-5">
+				<f:for each="{subcat.chapters}" as="chapter">
+					<li>
+						<f:link.action action="show" arguments="{chapter: chapter}">#{chapter.chapterId} - {chapter.title}</f:link.action>
+					</li>
+				</f:for>
+			</ul>
+		</f:for>
+	</f:for>
+</div>
+
+<div class="fixed bottom-0 left-0 z-50 w-full h-fit bg-white border-t border-gray-200">
+    <div class="grid h-full max-w-lg grid-cols-7 mx-auto font-medium">
+	<f:for each="{topCategories}" as="topCat">
+		<f:link.action action="list" arguments="{categoryUid: topCat.uid}" 
+                class="inline-flex flex-col items-center justify-center px-4 py-3 cursor-pointer group 
+                {f:if(condition: '{topCat.uid} == {activeCategoryUid}', then: 'opacity-100', else: 'opacity-50 hover:opacity-100')}">
+			<f:if condition="{topCat.icon}">
+				<f:image image="{topCat.icon.0}" width="32" height="32" alt="{topCat.title}" />
+			</f:if>
+            <span class="text-sm text-[{topCat.color}] text-nowrap">{topCat.title}</span>
+        </f:link.action>
+	</f:for>
+    </div>
+</div>
