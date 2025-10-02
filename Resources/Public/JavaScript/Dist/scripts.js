@@ -1,6 +1,15 @@
-/*!
- * HisnulMuslim v1.0.0 (https://hisnulmuslim.de)
- * Copyright 2017-2025 Aydin Mirzagayev
- * Licensed under the GPL-2.0-or-later license
- */
-console.log("WE LOVE TYPO3");
+$(document).ready(function() {
+    $("#search_open").click(function() {
+        $("h1").hide();
+        $("#mobilemenu_opener").hide();
+        $("#search_close").show();
+        $("#searchfield").show();
+        $("#searchfield").focus();
+    });
+    $("#search_close").click(function() {
+        $("h1").show();
+        $("#mobilemenu_opener").show();
+        $("#search_close").hide();
+        $("#searchfield").hide();
+    });
+});

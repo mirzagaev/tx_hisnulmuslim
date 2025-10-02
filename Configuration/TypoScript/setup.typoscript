@@ -146,7 +146,7 @@ page {
     }
 
     includeJSLibs {
-
+        jquery = EXT:hisnulmuslim/Resources/Public/JavaScript/Src/jquery.js
     }
 
     includeJS {

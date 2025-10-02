@@ -49,7 +49,7 @@ class AppController extends ActionController
         // Standard: UID 1, wenn kein Argument
         $topCategory = $this->categoryRepository->findByUid($categoryUid);
 
-        $categoriesWithChildrenAndChapters = [];
+        // $categoriesWithChildrenAndChapters = [];
 
         if ($topCategory) {
             $subcategoriesData = [];
@@ -62,14 +62,15 @@ class AppController extends ActionController
                 ];
             }
 
-            $categoriesWithChildrenAndChapters[] = [
-                'category' => $topCategory,
-                'subcategories' => $subcategoriesData
-            ];
+            // $categoriesWithChildrenAndChapters[] = [
+            //     'category' => $topCategory,
+            //     'subcategories' => $subcategoriesData
+            // ];
         }
 
         $this->view->assign('topCategories', $topCategories);
-        $this->view->assign('categories', $categoriesWithChildrenAndChapters);
+        $this->view->assign('category', $topCategory);
+        $this->view->assign('subcategories', $subcategoriesData);
         $this->view->assign('activeCategoryUid', $topCategory?->getUid());
 
         return $this->htmlResponse();
