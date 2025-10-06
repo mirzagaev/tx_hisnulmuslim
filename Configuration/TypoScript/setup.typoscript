@@ -15,6 +15,17 @@
 page = PAGE
 page {
     typeNum = 0
+
+    bodyTagCObject >
+    bodyTagCObject = COA
+    bodyTagCObject {
+        10 = TEXT
+        10.data = GP:tx_hisnulmuslim_app|categoryUid
+        10.wrap = class="text-primary category|"  
+
+        stdWrap.noTrimWrap = |<body |>|   
+    }
+
     shortcutIcon = EXT:hisnulmuslim/Resources/Public/Icons/favicon.ico
 
     10 = FLUIDTEMPLATE
@@ -142,23 +153,21 @@ page {
     }
 
     includeCSS {
-        hisnulmuslim_layout = EXT:hisnulmuslim/Resources/Public/Css/layout.min.css
+        hisnulmuslim_layout = EXT:hisnulmuslim/Resources/Public/Css/app.css
     }
 
     includeJSLibs {
-        jquery = EXT:hisnulmuslim/Resources/Public/JavaScript/Src/jquery.js
+        jquery = EXT:hisnulmuslim/Resources/Public/JavaScript/Src/jquery.min.js
     }
 
     includeJS {
-        tailwindJS = https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4
+        hisnulmuslim_scripts = EXT:hisnulmuslim/Resources/Public/JavaScript/Dist/scripts.js
     }
 
-    includeJSFooterlibs {
-
-    }
+    includeJSFooterlibs {}
 
     includeJSFooter {
-        hisnulmuslim_scripts = EXT:hisnulmuslim/Resources/Public/JavaScript/Dist/scripts.js
+        flowbite = EXT:hisnulmuslim/Resources/Public/JavaScript/Src/flowbite.min.js
     }
 }
 
