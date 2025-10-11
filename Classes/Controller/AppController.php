@@ -37,6 +37,21 @@ class AppController extends ActionController
     }
 
     /**
+     * index Action
+     *
+     * @return string
+     */
+    public function indexAction(): ResponseInterface
+    {
+        // Alle Top-Kategorien holen
+        $topCategories = $this->categoryRepository->findTopLevel();
+
+        $this->view->assign('topCategories', $topCategories);
+
+        return $this->htmlResponse();
+    }
+
+    /**
      * list Action
      *
      * @return string

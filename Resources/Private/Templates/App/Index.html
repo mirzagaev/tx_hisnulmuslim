@@ -147,11 +147,9 @@
 		<span class="sr-only">Close search</span>
 	</button>
 	<div class="flex justify-between items-center ml-3 xl:ml-8">
-		<div class="flex items-center font-semibold text-2xl gap-1" id="pageheadline">
-			<h1><f:link.action action="index">Hisnul Muslim</f:link.action></h1>
-			<svg stroke-width="1.5" fill="none" class="mt-1 size-4 stroke-current"><use xlink:href="#icon-right"></use></svg>
-			<h2 class="textcolor_category{category.uid}">{category.title}</h2>
-		</div>
+      <div class="flex items-center font-semibold text-2xl gap-1" id="pageheadline">
+        <h1>Hisnul Muslim</h1>
+      </div>
 		<input class="hidden w-full text-primary leading-tight focus:outline-none py-1" id="searchfield" type="text" placeholder="Bittgebete durchsuchen">
 	</div>
 	<div class="ml-auto" id="search_open">
@@ -162,26 +160,26 @@
 </header>
 
 <main id="app_category_{category.uid}">
-	<!-- UNTERKATEGORIEN LIST -->
-	<div class="tx-hisnulmuslim-app" data-catUid="{category.uid}">
-		<div class="tx-hisnulmuslim-app-subcats">
-		<f:for each="{subcategories}" as="subcat">
-			<div class="tx-hisnulmuslim-app-subcat">
-				<h2 class="font-semibold mt-5 px-5 pt-3 pb-1">{subcat.subcategory.title}</h2>
-				<ul class="divide-y px-5 font-normal text-sm">
-					<f:for each="{subcat.chapters}" as="chapter">
-						<li>
-							<f:link.action action="show" class="py-3 flex justify-between items-center" arguments="{chapter: chapter, categoryUid: chapter.categories.0.uid}">
-								<span class="flex-1 pr-2">{chapter.title}</span>
-								<svg stroke-width="1.5" fill="none" class="size-4 stroke-current"><use xlink:href="#icon-right"></use></svg>
-							</f:link.action>
-						</li>
-					</f:for>
-				</ul>
-			</div>
-		</f:for>
-		</div>
-	</div>
+    <div class="tx-hisnulmuslim-app">
+
+      <img src="https://www.hisnulmuslim.de/fileadmin/HisnulMuslim/Logo/logo.svg" class="mx-auto size-14 mt-10" />
+
+      <h3 class="text-center my-10 text-3xl font-bold text-hm_primary dark:text-white">"Die Hisnul Muslim App -<br/>
+        das Original, neu gedacht."</h3>
+      
+      <span class="block font-medium text-center text-primary">Alle Duas aus dem klassischen Hisnul Muslim,<br/>neu kategorisiert für einfacheren Zugang.</span>
+
+      <div class="grid w-full grid-cols-7 p-10 gap-2">
+        <div class="bg-category1 h-1.5"></div>
+        <div class="bg-category2 h-1.5"></div>
+        <div class="bg-category3 h-1.5"></div>
+        <div class="bg-category4 h-1.5"></div>
+        <div class="bg-category5 h-1.5"></div>
+        <div class="bg-category6 h-1.5"></div>
+        <div class="bg-category7 h-1.5"></div>
+      </div>
+
+    </div>
 
 	<!-- KATEGORIEN MENU -->
 	<nav class="fixed bottom-0 xl:top-16 left-0 z-30 w-full xl:w-fit xl:min-h-screen bg-primary">

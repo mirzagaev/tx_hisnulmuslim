@@ -13,14 +13,14 @@ function toggleDarkMode() {
 
 $(document).ready(function() {
     $("#search_open").click(function() {
-        $("h1").hide();
+        $("#pageheadline").hide();
         $("#mobilemenu_opener").hide();
         $("#search_close").show();
         $("#searchfield").show();
         $("#searchfield").focus();
     });
     $("#search_close").click(function() {
-        $("h1").show();
+        $("#pageheadline").show();
         $("#mobilemenu_opener").show();
         $("#search_close").hide();
         $("#searchfield").hide();

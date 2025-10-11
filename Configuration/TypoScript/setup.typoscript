@@ -20,8 +20,11 @@ page {
     bodyTagCObject = COA
     bodyTagCObject {
         10 = TEXT
-        10.data = GP:tx_hisnulmuslim_app|categoryUid
-        10.wrap = class="text-primary category|"  
+        10 {
+            data = GP:tx_hisnulmuslim_app|categoryUid
+            ifEmpty = 0
+            wrap = class="text-primary category|"
+        }
 
         stdWrap.noTrimWrap = |<body |>|   
     }
