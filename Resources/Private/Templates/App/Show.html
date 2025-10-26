@@ -107,7 +107,7 @@
 </svg>
 
 <!-- MOBILE MENU -->
-<div id="drawer-navigation" class="fixed top-0 left-0 z-40 h-screen p-4 overflow-y-auto transition-transform -translate-x-full bg-primary w-64" tabindex="-1" aria-labelledby="drawer-navigation-label">
+<div id="drawer-navigation" class="fixed top-0 left-0 z-50 h-screen p-4 overflow-y-auto transition-transform -translate-x-full bg-primary w-64" tabindex="-1" aria-labelledby="drawer-navigation-label">
 	<div class="w-full px-2">
 		<div class="flex flex-col items-center w-full">
 			<f:link.action action="index" class="flex items-center w-full h-12 px-3 mt-2 rounded bg-secondary">
@@ -128,88 +128,83 @@
 	</button>
 </div>
 
-<div class="app_dua_detail" id="app_category_{chapter.categories.0.uid}">
-  <header class="w-full">
-      <button type="button" id="mobilemenu_opener" data-drawer-target="drawer-navigation"
-      data-drawer-show="drawer-navigation" aria-controls="drawer-navigation"
-      class="flex items-center justify-center absolute top-5 left-4">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-              class="size-6">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"></path>
-          </svg>
-          <span class="sr-only">Open actions menu</span>
-      </button>
-      <div class="flex justify-between py-4 pl-12 pr-7">
-          <h1 class="font-semibold">{chapter.title}</h1>
-          <input class="hidden w-full text-primary leading-tight focus:outline-none pt-2" id="searchfield" type="text" placeholder="Bittgebete durchsuchen">
-          <div class="pl-auto" id="addFavBtn">
-            <svg class="fill-primary w-9 h-9" xmlns="http://www.w3.org/2000/svg" width="141.7" height="141.7" version="1.1" viewBox="0 0 141.7 141.7">
-              <path class="st0" d="M39.4,122.5c-.6,0-1.2-.2-1.7-.6-1-.7-1.4-1.8-1.1-2.9l7.1-32.5c.4-1.8-.2-3.8-1.7-5l-23.6-19.6c-.9-.8-1.2-1.9-.9-3s1.2-1.9,2.4-2l30-3.4c1.7-.2,3.2-1.2,4-2.8l14.4-29.8c.5-1,1.5-1.6,2.6-1.6s2.1.6,2.6,1.6l14.4,29.8c.8,1.6,2.2,2.6,4,2.8l30,3.4c1.2.1,2.1.9,2.4,2,.3,1.1,0,2.3-.9,3l-23.6,19.6c-1.5,1.2-2.1,3.1-1.7,5l7.1,32.5c.2,1.2-.2,2.2-1.1,2.9s-2.1.7-3.2.1l-27.4-16.4c-1.6-1-3.6-1-5.2,0l-27.4,16.4c-.5.3-1,.4-1.5.4h0ZM101.8,119.7h0,0ZM21.4,60.1l22.7,18.9c2.4,2,3.5,5.2,2.8,8.3l-6.8,31.4,26.4-15.8c2.7-1.6,6-1.6,8.7,0l26.4,15.8-6.8-31.4c-.7-3.1.4-6.3,2.8-8.3l22.7-18.9-28.8-3.3c-2.9-.3-5.4-2.1-6.6-4.7l-14-28.9-14,28.9c-1.3,2.6-3.8,4.4-6.6,4.7l-28.8,3.3Z"/>
-            </svg>
-          </div>
-      </div>
-  </header>
+<header class="duashowaction relative z-40 w-full shadow flex flex-wrap py-5 pl-3 xl:pl-5 pr-7 mb-5">
+  <button type="button" id="mobilemenu_opener" data-drawer-target="drawer-navigation" data-drawer-show="drawer-navigation" aria-controls="drawer-navigation"
+    class="flex">
+    <svg stroke-width="1.5" class="size-6 xl:size-8 stroke-white"><use xlink:href="#icon-burgermenu"></use></svg>
+    <span class="sr-only">Open actions menu</span>
+  </button>
+    <div class="flex justify-between items-center ml-3.5 xl:ml-4.5 mb-3 font-medium gap-1 rounded-sm bg-white px-2 py-1" id="pageheadline">
+    <h2><f:link.action action="index">Hisnul Muslim</f:link.action></h2>
+    <svg stroke-width="3" fill="none" class="size-3 stroke-current"><use xlink:href="#icon-right"></use></svg>
+    <h2><f:link.action action="list" arguments="{categoryUid: chapter.categories.0.uid}">{chapter.categories.0.title}</f:link.action></h2>
+  </div>
+  <div class="w-full mx-9 xl:mx-12">
+    <h1 class="text-3xl">{chapter.title}</h1>
+  </div>
+  <button class="favorisieren_btn" type="button">
+    <svg stroke-width="1.5"><use xlink:href="#icon-fav-inactive"></use></svg>
+  </button>
+</header>
 
-  <main class="w-full tx-hisnulmuslim-show">
-    <div class="tx-hisnulmuslim-app-show-dua" data-catUid="{chapter.categories.0.uid}" data-chapter-uid="{chapter.uid}">
-        <div class="tx-hisnulmuslim-app-subcats">
-            <f:for each="{chapter.dua}" as="dua">
-            <div class="tx-hisnulmuslim-app-subcat" data-dua-uid="{dua.uid}">
-                <ul class="divide-y px-5 py-2 font-normal text-sm">
-                    <f:for each="{dua.items}" as="item">
-                        <f:switch expression="{item.type}">
-                            <f:case value="dua_translation">
-                                <f:variable name="duaItemVar" value="py-3 font-normal text-lg" />
-                            </f:case>
-                            <f:case value="dua">
-                                <f:variable name="duaItemVar" value="py-3 font-serif text-2xl text-right" />
-                            </f:case>
-                            <f:case value="dua_umschrift">
-                                <f:variable name="duaItemVar" value="pt-1 pb-3 font-normal text-md italic text-secondary" />
-                            </f:case>
-                            <f:case value="quran">
-                                <f:variable name="duaItemVar" value="py-3 font-serif text-2xl text-right" />
-                            </f:case>
-                            <f:case value="quran_translation">
-                                <f:variable name="duaItemVar" value="py-3 font-normal text-lg" />
-                            </f:case>
-                            <f:case value="quran_umschrift">
-                                <f:variable name="duaItemVar" value="pt-1 pb-3 font-normal text-md italic text-secondary" />
-                            </f:case>
-                            <f:case value="hadith">
-                                <f:variable name="duaItemVar" value="py-3 font-serif text-2xl text-right" />
-                            </f:case>
-                            <f:case value="hadith_translation">
-                                <f:variable name="duaItemVar" value="py-3 font-normal text-lg" />
-                            </f:case>
-                            <f:case value="hadith_umschrift">
-                                <f:variable name="duaItemVar" value="pt-1 pb-3 font-normal text-md italic text-secondary" />
-                            </f:case>
-                            <f:case value="ar">
-                                <f:variable name="duaItemVar" value="py-3 font-serif text-2xl text-right" />
-                            </f:case>
-                            <f:case value="ar_translation">
-                                <f:variable name="duaItemVar" value="py-3 font-normal text-lg" />
-                            </f:case>
-                            <f:case value="ar_umschrift">
-                                <f:variable name="duaItemVar" value="pt-1 pb-3 font-normal text-md italic text-secondary" />
-                            </f:case>
-                            <f:case value="hinweis">
-                                <f:variable name="duaItemVar" value="py-3 font-normal text-base" />
-                            </f:case>
-                            <f:case value="quelle">
-                                <f:variable name="duaItemVar" value="py-3 font-normal text-sm" />
-                            </f:case>
-                            <f:defaultCase>
-                                <f:variable name="duaItemVar" value="py-3 font-normal text-base"/>
-                            </f:defaultCase>
-                        </f:switch>
-                        <li class="{duaItemVar}" data-dua-item-uid="{item.uid}" data-dua-item-type="{item.type}">{item.content -> f:format.raw()}</li>
-                    </f:for>
-                </ul>
-            </div>
-            </f:for>
-        </div>
-    </div>
-  </main>
-</div>
+<main class="w-full tx-hisnulmuslim-show">
+  <div class="tx-hisnulmuslim-app-show-dua" id="app_category_{chapter.categories.0.uid}" data-catUid="{chapter.categories.0.uid}" data-chapter-uid="{chapter.uid}">
+    <f:for each="{chapter.dua}" as="dua">
+    <article class="tx-hisnulmuslim-app-subcat" data-dua-uid="{dua.uid}">
+      <div class="nummerierung">{chapter.chapterId} / {dua.duaId}</div>
+      <ul class="divide-y px-5 py-2 font-normal text-sm">
+        <f:for each="{itemsByDua.{dua.uid}}" as="item">
+          <f:switch expression="{item.type}">
+            <f:case value="dua_translation">
+              <f:variable name="duaItemVar" value="py-3 font-normal text-lg border-b-1 border-neutral-200" />
+            </f:case>
+            <f:case value="dua">
+              <f:variable name="duaItemVar" value="py-3 font-serif text-2xl text-right" />
+            </f:case>
+            <f:case value="dua_umschrift">
+              <f:variable name="duaItemVar" value="pt-1 pb-3 font-normal text-md italic text-secondary" />
+            </f:case>
+            <f:case value="quran">
+              <f:variable name="duaItemVar" value="py-3 font-serif text-2xl text-right" />
+            </f:case>
+            <f:case value="quran_translation">
+              <f:variable name="duaItemVar" value="py-3 font-normal text-lg border-b-1 border-neutral-200" />
+            </f:case>
+            <f:case value="quran_umschrift">
+              <f:variable name="duaItemVar" value="pt-1 pb-3 font-normal text-md italic text-secondary" />
+            </f:case>
+            <f:case value="hadith">
+              <f:variable name="duaItemVar" value="py-3 font-serif text-2xl text-right" />
+            </f:case>
+            <f:case value="hadith_translation">
+              <f:variable name="duaItemVar" value="py-3 font-normal text-lg border-b-1 border-neutral-200" />
+            </f:case>
+            <f:case value="hadith_umschrift">
+              <f:variable name="duaItemVar" value="pt-1 pb-3 font-normal text-md italic text-secondary" />
+            </f:case>
+            <f:case value="ar">
+              <f:variable name="duaItemVar" value="py-3 font-serif text-2xl text-right" />
+            </f:case>
+            <f:case value="ar_translation">
+              <f:variable name="duaItemVar" value="py-3 font-normal text-lg border-b-1 border-neutral-200" />
+            </f:case>
+            <f:case value="ar_umschrift">
+              <f:variable name="duaItemVar" value="pt-1 pb-3 font-normal text-md italic text-secondary" />
+            </f:case>
+            <f:case value="hinweis">
+              <f:variable name="duaItemVar" value="py-3 font-normal text-base" />
+            </f:case>
+            <f:case value="quelle">
+              <f:variable name="duaItemVar" value="py-3 font-normal text-sm" />
+            </f:case>
+            <f:defaultCase>
+              <f:variable name="duaItemVar" value="py-3 font-normal text-base"/>
+            </f:defaultCase>
+          </f:switch>
+          <li class="{duaItemVar}" data-dua-item-uid="{item.uid}" data-dua-item-type="{item.type}">{item.content -> f:format.raw()}</li>
+        </f:for>
+      </ul>
+    </article>
+    </f:for>
+  </div>
+</main>

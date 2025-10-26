@@ -5,9 +5,11 @@ namespace Webzadev\Hisnulmuslim\Controller;
 
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 use Webzadev\Hisnulmuslim\Domain\Repository\CategoryRepository;
 use Webzadev\Hisnulmuslim\Domain\Model\Chapter;
 use Webzadev\Hisnulmuslim\Domain\Repository\ChapterRepository;
+use Webzadev\Hisnulmuslim\Domain\Repository\DuaItemRepository;
 
 class AppController extends ActionController
 {
@@ -34,6 +36,21 @@ class AppController extends ActionController
     public function injectChapterRepository(ChapterRepository $chapterRepository)
     {
         $this->chapterRepository = $chapterRepository;
+    }
+
+    /**
+     * @var DuaItemRepository
+     */
+    private $duaItemRepository;
+
+    /**
+     * Inject the duaItemRepository repository
+     *
+     * @param \Webzadev\Hisnulmuslim\Domain\Repository\DuaItemRepository $duaItemRepository
+     */
+    public function injectDuaItemRepository(DuaItemRepository $duaItemRepository)
+    {
+        $this->duaItemRepository = $duaItemRepository;
     }
 
     /**
@@ -130,7 +147,24 @@ class AppController extends ActionController
      */
     public function showAction(Chapter $chapter): ResponseInterface
     {
+        $itemsByDua = [];
+
+        foreach ($chapter->getDua() as $dua) {
+            $q = $this->duaItemRepository->createQuery();
+
+            // IRRE (1:n): DuaItem hat Feld "dua" als foreign_field
+            $items = $q->matching(
+                    $q->equals('dua', $dua)
+                )
+                ->setOrderings(['sorting' => QueryInterface::ORDER_ASCENDING])
+                ->execute();
+
+            $itemsByDua[$dua->getUid()] = $items;
+        }
+
         $this->view->assign('chapter', $chapter);
+        $this->view->assign('itemsByDua', $itemsByDua);
+
         return $this->htmlResponse();
     }
 }
