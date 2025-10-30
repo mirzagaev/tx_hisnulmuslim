@@ -142,13 +142,15 @@
 		</svg>
 		<span class="sr-only">Close search</span>
 	</button>
-	<div class="flex justify-between items-center ml-3 xl:ml-8">
+	<div class="flex-1 justify-between items-center ml-3 xl:ml-8">
 		<div class="flex items-center font-semibold text-xl gap-1" id="pageheadline">
     		<h2><f:link.action action="index">Hisnul Muslim</f:link.action></h2>
 			<svg stroke-width="2" fill="none" class="mt-1 size-4 stroke-current"><use xlink:href="#icon-right"></use></svg>
 			<h1>{category.title}</h1>
 		</div>
-		<input class="hidden w-full text-white leading-tight focus:outline-none py-1" id="searchfield" type="text" placeholder="Bittgebete durchsuchen">
+		<f:form action="search" method="post">
+        	<f:form.textfield class="hidden w-full border-b-1 border-neutral-300" id="searchfield" name="query" value="{query}" placeholder="Bittgebete durchsuchen" />
+		</f:form>
 	</div>
 	<div class="ml-auto" id="search_open">
 		<svg stroke-width="1.5" class="size-6 fill-current">

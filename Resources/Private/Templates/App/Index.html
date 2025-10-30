@@ -144,10 +144,12 @@
       <span class="sr-only">Close search</span>
     </button>
     <div class="flex justify-between items-center ml-3 xl:ml-8">
-        <div class="flex items-center font-semibold text-xl gap-1" id="pageheadline">
-          <h1>Hisnul Muslim</h1>
-        </div>
-      <input class="hidden w-full text-primary leading-tight focus:outline-none py-1" id="searchfield" type="text" placeholder="Bittgebete durchsuchen">
+      <div class="flex items-center font-semibold text-xl gap-1" id="pageheadline">
+        <h1>Hisnul Muslim</h1>
+      </div>
+      <f:form action="search" method="post">
+        <f:form.textfield class="hidden w-full" id="searchfield" name="query" value="{query}" placeholder="Bittgebete durchsuchen" />
+      </f:form>
     </div>
     <div class="ml-auto" id="search_open">
       <svg stroke-width="1.5" class="size-6 fill-current">
@@ -158,8 +160,8 @@
 
   <main>
     <div class="tx-hisnulmuslim-app">
-      <div class="w-fit pt-10 mx-auto">
-        <img src="https://www.hisnulmuslim.de/fileadmin/HisnulMuslim/Logo/logo.svg" class=" size-14" />
+      <div class="w-fit mt-5 p-4 mx-auto xl:mx-0 bg-primary rounded-full">
+        <img src="https://www.hisnulmuslim.de/fileadmin/HisnulMuslim/Logo/logo.svg" class="size-14" />
       </div>
       <div class="block mx-3 xl:mx-0 my-5">
         <h3 class="text-center xl:text-left my-10 text-3xl/14 font-bold p-2 bg-primary w-fit inline text-hm_primary dark:text-white">"Die Hisnul Muslim App - das Original, neu gedacht."</h3>

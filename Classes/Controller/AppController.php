@@ -167,4 +167,28 @@ class AppController extends ActionController
 
         return $this->htmlResponse();
     }
+
+    /**
+     * Search action
+     *
+     * @param string $query Suchbegriff
+     * @return ResponseInterface
+     */
+    public function searchAction(string $query = ''): ResponseInterface
+    {
+        $results = [];
+
+        if (!empty($query)) {
+            // Beispiel: Suche in Chapter-Titeln
+            $results = $this->chapterRepository->findBySearchTerm($query);
+        }
+
+        $this->view->assignMultiple([
+            'query' => $query,
+            'results' => $results,
+        ]);
+
+        return $this->htmlResponse();
+    }
+
 }

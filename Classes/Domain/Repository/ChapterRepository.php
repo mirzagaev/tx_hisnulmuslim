@@ -16,4 +16,25 @@ class ChapterRepository extends Repository
         );
         return $query->execute();
     }
+    
+    public function findBySearchTerm(string $term)
+    {
+        $query = $this->createQuery();
+
+        // $constraints = [
+        //     $query->like('title', '%' . $term . '%'),
+        //     $query->like('titleAr', '%' . $term . '%'),
+        // ];
+
+        // $query->matching(
+        //     $query->logicalOr(...$constraints)
+        // );
+
+        $query->matching(
+            $query->like('title', '%' . $term . '%')
+        );
+
+        return $query->execute();
+    }
+
 }
