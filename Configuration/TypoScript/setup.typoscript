@@ -23,13 +23,13 @@ page {
         10 {
             data = GP:tx_hisnulmuslim_app|categoryUid
             ifEmpty = 0
-            wrap = class="text-primary category|"
+            wrap = class="text-primary h-[100dvh] flex flex-col category|"
         }
 
         stdWrap.noTrimWrap = |<body |>|   
     }
 
-    shortcutIcon = EXT:hisnulmuslim/Resources/Public/Icons/favicon.ico
+    shortcutIcon = EXT:hisnulmuslim/Resources/Public/Icons/hm-logo-blau.png
 
     10 = FLUIDTEMPLATE
     10 {

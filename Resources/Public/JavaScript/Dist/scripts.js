@@ -25,4 +25,16 @@ $(document).ready(function() {
         $("#search_close").hide();
         $("#searchfield").hide();
     });
+
+    $(".chapterLinks").on("click", function() {
+      $("#cart-drawer").removeClass("translate-x-full");
+      $("#overlay").removeClass("hidden");
+      return false;
+    });
+
+    $("#overlay, #closeDrawer").on("click", function() {
+      $("#cart-drawer").addClass("translate-x-full");
+      $("#overlay").addClass("hidden");
+      return false;
+    });
 });
