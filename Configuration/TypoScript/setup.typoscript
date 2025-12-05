@@ -211,13 +211,35 @@ config {
     concatenateCss = 0
 }
 
+showApi = PAGE
+showApi {
+  typeNum = 20262
+  config {
+    disableAllHeaderCode = 1
+    admPanel = 0
+    debug = 0
+    no_cache = 0
+    additionalHeaders = Content-type:application/json
+  }
+
+  10 = USER
+  10 {
+    userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
+    vendorName = Webzadev
+    extensionName = Hisnulmuslim
+    pluginName = App
+    controller = App
+    action = show
+  }
+}
+
 ajaxApi = PAGE
 ajaxApi {
-  typeNum = 21
+  typeNum = 20261
   config {
     disableAllHeaderCode = 1
     additionalHeaders.10.header = Content-Type: application/json
-    no_cache = 1
+    no_cache = 0
   }
 
   10 = USER
@@ -226,5 +248,6 @@ ajaxApi {
     extensionName = Hisnulmuslim
     pluginName = Api
     vendorName = Webzadev
+    action = show
   }
 }

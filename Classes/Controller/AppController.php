@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Webzadev\Hisnulmuslim\Controller;
 
 use Psr\Http\Message\ResponseInterface;
+use TYPO3\CMS\Core\Http\JsonResponse;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 use Webzadev\Hisnulmuslim\Domain\Repository\CategoryRepository;
@@ -145,9 +146,18 @@ class AppController extends ActionController
      * @param Chapter $chapter The chapter to be shown
      * @return string The rendered HTML string
      */
-    public function showAction(Chapter $chapter): ResponseInterface
+    public function showAction(Chapter $chapter): JsonResponse
     {
-        $itemsByDua = [];
+        // JSON Response vorbereiten
+        $jsonData = [
+            'success' => true,
+            'chapter' => [
+                'uid' => $chapter->getUid(),
+                'title' => $chapter->getTitle(),
+                'chapterId' => $chapter->getChapterId(),
+            ],
+            'duas' => []
+        ];
 
         foreach ($chapter->getDua() as $dua) {
             $q = $this->duaItemRepository->createQuery();
@@ -162,11 +172,52 @@ class AppController extends ActionController
             $itemsByDua[$dua->getUid()] = $items;
         }
 
-        $this->view->assign('chapter', $chapter);
-        $this->view->assign('itemsByDua', $itemsByDua);
+        foreach ($chapter->getDua() as $dua) {
+            $duaData = [
+                'uid' => $dua->getUid(),
+                'duaId' => $dua->getDuaId(),
+                'items' => []
+            ];
 
-        return $this->htmlResponse();
+            // $q = $this->duaItemRepository->createQuery();
+
+            // IRRE (1:n): DuaItem hat Feld "dua" als foreign_field
+            // $items = $q->matching(
+            //         $q->equals('dua', $dua)
+            //     )
+            //     ->setOrderings(['sorting' => QueryInterface::ORDER_ASCENDING])
+            //     ->execute(true);
+
+                
+            // $duaData['items'] = $items;
+
+            // $rows = $q->execute()->fetchAll();
+            // print_r( $items);
+
+            // foreach ($items as $item) {
+                // $duaData['items'][] = [
+                //     'uid' => $item->getUid(),
+                //     'type' => $item->getType(),
+                //     'content' => $item->getContent(),
+                // ];
+            // }
+
+
+
+            foreach ($dua->getItems() as $item) {
+                $duaData['items'][] = [
+                    'uid' => $item->getUid(),
+                    'type' => $item->getType(),
+                    'content' => $item->getContent(),
+                ];
+            }
+
+            $jsonData['duas'][] = $duaData;
+        }
+
+        return new JsonResponse($jsonData);
     }
+
 
     /**
      * Search action

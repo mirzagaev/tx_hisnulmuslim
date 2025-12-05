@@ -37,6 +37,20 @@ class ApiController extends ActionController
     }
 
     /**
+     * show Action
+     *
+     * @return string
+     */
+    public function showAction(): ResponseInterface
+    {
+        // $categories = $this->categoryRepository->findTopLevel();
+        $chapters = $this->chapterRepository->findAll();
+        
+        $data = ['show' => 1];
+        return new JsonResponse($data);
+    }
+
+    /**
      * list Action
      *
      * @return string
@@ -45,6 +59,8 @@ class ApiController extends ActionController
     {
         // $categories = $this->categoryRepository->findTopLevel();
         $chapters = $this->chapterRepository->findAll();
+        $topCategories = $this->categoryRepository->findTopLevel();
+        $topCategory = $this->categoryRepository->findByUid(1);
 
         $result = [];
 
@@ -76,17 +92,17 @@ class ApiController extends ActionController
         //     ];
         // }
 
-        $chaptersData = [];
-        foreach ($chapters as $chapter) {
-            $chaptersData[] = [
-                'chapterId' => $chapter->getChapterId(),
-                'title' => $chapter->getTitle(),
-                'titleAr' => $chapter->getTitleAr(),
-                'dua' => []
-            ];
-        }
+        // $chaptersData = [];
+        // foreach ($chapters as $chapter) {
+        //     $chaptersData[] = [
+        //         'chapterId' => $chapter->getChapterId(),
+        //         'title' => $chapter->getTitle(),
+        //         'titleAr' => $chapter->getTitleAr(),
+        //         'dua' => []
+        //     ];
+        // }
         
-        $data = ['categories' => $chaptersData];
+        $data = ['categories' => 2];
         return new JsonResponse($data);
     }
 }

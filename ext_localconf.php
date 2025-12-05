@@ -39,10 +39,10 @@ ExtensionUtility::configurePlugin(
     'Hisnulmuslim', // <== Dein extKey mit Vendor in composer.json abgleichen
     'Api',
     [
-        ApiController::class => 'list'
+        ApiController::class => 'list, show'
     ],
     [
-        ApiController::class => 'list'
+        ApiController::class => 'list, show'
     ]
 );
 

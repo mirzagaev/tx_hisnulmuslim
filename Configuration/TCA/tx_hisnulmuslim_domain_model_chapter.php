@@ -20,7 +20,7 @@ return [
         '0' => [
             'showitem' => '
                 --div--;Allgemein,
-                    --palette--;;language, --palette--;;visibility, chapter_id, title, title_ar, hidden,
+                    --palette--;;language, --palette--;;visibility, chapter_id, title, slug, title_ar, hidden,
                 --div--;Bittgebete,
                     dua,
                 --div--;Kategorie,
@@ -65,6 +65,22 @@ return [
                 'type' => 'input',
                 'eval' => 'trim,required',
                 'size' => 50,
+            ],
+        ],
+        'slug' => [
+            'exclude' => true,
+            'label' => 'URL Segment (Slug)',
+            'config' => [
+                'type' => 'slug',
+                'size' => 50,
+                'generatorOptions' => [
+                    'fields' => ['title'],
+                    'replacements' => [
+                        '/' => '-',
+                    ],
+                ],
+                'fallbackCharacter' => '-',
+                'eval' => 'uniqueInSite',
             ],
         ],
         'title_ar' => [

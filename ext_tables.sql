@@ -1,4 +1,5 @@
 CREATE TABLE tx_hisnulmuslim_domain_model_chapter (
+	slug varchar(2048) DEFAULT '' NOT NULL
 );
 
 CREATE TABLE tx_hisnulmuslim_domain_model_dua (
