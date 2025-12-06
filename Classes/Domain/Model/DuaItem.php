@@ -7,6 +7,7 @@ class DuaItem extends AbstractEntity
 {
     protected string $type = ''; // ar, ar_translation, dua, dua_umschrift, dua_translation, hinweis
     protected string $content = '';
+    protected int $sorting = 0;
 
     public function getType(): string
     {
@@ -26,5 +27,15 @@ class DuaItem extends AbstractEntity
     public function setContent(string $content): void
     {
         $this->content = $content;
+    }
+
+    public function getSorting(): int
+    {
+        return $this->sorting;
+    }
+    
+    public function setSorting(int $sorting): void
+    {
+        $this->sorting = $sorting;
     }
 }

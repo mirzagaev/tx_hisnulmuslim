@@ -137,7 +137,7 @@ function buildChapterHTML(data) {
             html += '  </div>';
             
             // Items Liste
-            html += '  <ul class="divide-y px-10 py-4 font-normal text-sm">';
+            html += '  <ul class="px-10 py-4 font-normal text-sm">';
             
             // Prüfen ob items ein Array ist
             if (Array.isArray(dua.items) && dua.items.length > 0) {

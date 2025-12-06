@@ -2654,19 +2654,19 @@
         line-height: var(--tw-leading, var(--text-lg--line-height));
         --tw-font-weight: var(--font-weight-normal);
         font-weight: var(--font-weight-normal);
-        border-bottom-style: var(--tw-border-style);
-        border-bottom-width: 1px;
-        border-color: var(--color-neutral-200);
-        &:where(.dark, .dark *) {
-          border-color: var(--color-neutral-500);
-        }
       }
       li[data-dua-item-type='dua'] {
         padding-block: calc(var(--spacing) * 5);
         text-align: right;
         font-family: var(--font-serif);
-        font-size: var(--text-4xl);
-        line-height: var(--tw-leading, var(--text-4xl--line-height));
+        @media (width >= 80rem) {
+          font-size: var(--text-3xl);
+          line-height: calc(var(--spacing) * 10);
+        }
+        @media (width >= 96rem) {
+          font-size: var(--text-4xl);
+          line-height: calc(var(--spacing) * 12);
+        }
       }
       li[data-dua-item-type='dua_umschrift'] {
         padding-top: calc(var(--spacing) * 3);
@@ -2679,8 +2679,7 @@
         border-color: var(--color-neutral-200);
         padding-bottom: calc(var(--spacing) * 6);
         &:where(.dark, .dark *) {
-          --tw-border-style: none;
-          border-style: none;
+          border-color: var(--color-neutral-500);
         }
       }
       li[data-dua-item-type='quran_translation'] {
@@ -2689,12 +2688,6 @@
         line-height: var(--tw-leading, var(--text-lg--line-height));
         --tw-font-weight: var(--font-weight-normal);
         font-weight: var(--font-weight-normal);
-        border-bottom-style: var(--tw-border-style);
-        border-bottom-width: 2px;
-        border-color: var(--color-neutral-200);
-        &:where(.dark, .dark *) {
-          border-color: var(--color-neutral-500);
-        }
       }
       li[data-dua-item-type='quran'] {
         padding-block: calc(var(--spacing) * 5);
@@ -2723,12 +2716,6 @@
         line-height: var(--tw-leading, var(--text-lg--line-height));
         --tw-font-weight: var(--font-weight-normal);
         font-weight: var(--font-weight-normal);
-        border-bottom-style: var(--tw-border-style);
-        border-bottom-width: 2px;
-        border-color: var(--color-neutral-200);
-        &:where(.dark, .dark *) {
-          border-color: var(--color-neutral-500);
-        }
       }
       li[data-dua-item-type='hadith'] {
         padding-block: calc(var(--spacing) * 5);
@@ -2756,12 +2743,6 @@
         line-height: var(--tw-leading, var(--text-lg--line-height));
         --tw-font-weight: var(--font-weight-normal);
         font-weight: var(--font-weight-normal);
-        border-bottom-style: var(--tw-border-style);
-        border-bottom-width: 2px;
-        border-color: var(--color-neutral-200);
-        &:where(.dark, .dark *) {
-          border-color: var(--color-neutral-500);
-        }
       }
       li[data-dua-item-type='ar'] {
         padding-block: calc(var(--spacing) * 5);

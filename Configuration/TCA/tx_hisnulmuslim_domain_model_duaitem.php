@@ -44,6 +44,11 @@ return [
                 'type' => 'check',
             ],
         ],
+        'sorting' => [
+            'config' => [
+                'type' => 'passthrough',
+            ],
+        ],
         'dua' => [
             'exclude' => true,
             'label' => 'Bittgebet',

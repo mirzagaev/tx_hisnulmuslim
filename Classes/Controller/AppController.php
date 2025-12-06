@@ -160,53 +160,24 @@ class AppController extends ActionController
         ];
 
         foreach ($chapter->getDua() as $dua) {
-            $q = $this->duaItemRepository->createQuery();
-
-            // IRRE (1:n): DuaItem hat Feld "dua" als foreign_field
-            $items = $q->matching(
-                    $q->equals('dua', $dua)
-                )
-                ->setOrderings(['sorting' => QueryInterface::ORDER_ASCENDING])
-                ->execute();
-
-            $itemsByDua[$dua->getUid()] = $items;
-        }
-
-        foreach ($chapter->getDua() as $dua) {
             $duaData = [
                 'uid' => $dua->getUid(),
                 'duaId' => $dua->getDuaId(),
                 'items' => []
             ];
 
-            // $q = $this->duaItemRepository->createQuery();
+            $itemsStorage = $dua->getItems();
+            $itemsArray = $itemsStorage->toArray();
 
-            // IRRE (1:n): DuaItem hat Feld "dua" als foreign_field
-            // $items = $q->matching(
-            //         $q->equals('dua', $dua)
-            //     )
-            //     ->setOrderings(['sorting' => QueryInterface::ORDER_ASCENDING])
-            //     ->execute(true);
+            // Manuell nach sorting sortieren
+            usort($itemsArray, function($a, $b) {
+                return $a->getSorting() <=> $b->getSorting();
+            });
 
-                
-            // $duaData['items'] = $items;
-
-            // $rows = $q->execute()->fetchAll();
-            // print_r( $items);
-
-            // foreach ($items as $item) {
-                // $duaData['items'][] = [
-                //     'uid' => $item->getUid(),
-                //     'type' => $item->getType(),
-                //     'content' => $item->getContent(),
-                // ];
-            // }
-
-
-
-            foreach ($dua->getItems() as $item) {
+            foreach ($itemsArray as $item) {
                 $duaData['items'][] = [
                     'uid' => $item->getUid(),
+                    'sorting' => $item->getSorting(),
                     'type' => $item->getType(),
                     'content' => $item->getContent(),
                 ];
