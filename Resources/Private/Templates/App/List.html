@@ -138,33 +138,55 @@
 	</div>
 </div>
 
-<main class="flex-1 overflow-auto h-full flex flex-col xl:flex-row px-5 pb-24 xl:pb-0">
+<div class="hidden lg:grid pl-9 pr-6 mb-5 w-full grid-cols-7">
+  <div class="bg-category1 h-1"></div>
+  <div class="bg-category2 h-1"></div>
+  <div class="bg-category3 h-1"></div>
+  <div class="bg-category4 h-1"></div>
+  <div class="bg-category5 h-1"></div>
+  <div class="bg-category6 h-1"></div>
+  <div class="bg-category7 h-1"></div>
+</div>
+
+
+<main class="flex-1 overflow-auto h-full flex flex-col xl:flex-row xl:px-5 pb-24 xl:pb-0">
 	<!-- NAVIGATION -->
-	<div class="fixed bottom-[60px] left-0 w-full flex py-1 xl:py-0 z-30 xl:static xl:w-fit xl:flex-col xl:px-4 xl:pr-3 xl:gap-4 xl:order-1" id="mainnav">
-		<f:for each="{topCategories}" as="topCat">
-		<f:link.action action="list" arguments="{categoryUid: topCat.uid}" title="{topCat.title}" id="catnav_{topCat.uid}" class="flex flex-col w-full items-center">
-			<f:if condition="{topCat.uid} == {activeCategoryUid}">
-				<f:then>
-					<span class="bg-category{topCat.uid} p-2 rounded-lg">
-						<svg class="size-6 sm:size-8 fill-white mx-auto"><use xlink:href="#icon-cat{topCat.uid}"></use></svg>
-					</span>
-					<span class="text-sm mt-1">{topCat.title}</span>
-				</f:then>
-				<f:else>
-					<span class="bg-neutral-300 dark:bg-neutral-800 p-2 rounded-lg">
-						<svg class="size-6 sm:size-8 fill-white mx-auto"><use xlink:href="#icon-cat{topCat.uid}"></use></svg>
-					</span>
-					<span class="text-sm font-extralight mt-1">{topCat.title}</span>
-				</f:else>
-			</f:if>
-		</f:link.action>
-		</f:for>
+	<div class="fixed z-30 bottom-[60px] left-0 w-full xl:static xl:order-1 py-1 xl:py-0 xl:w-fit xl:px-4 xl:pr-3">
+    <div class="grid lg:hidden mb-5 w-full grid-cols-7">
+      <div class="bg-category1 h-1"></div>
+      <div class="bg-category2 h-1"></div>
+      <div class="bg-category3 h-1"></div>
+      <div class="bg-category4 h-1"></div>
+      <div class="bg-category5 h-1"></div>
+      <div class="bg-category6 h-1"></div>
+      <div class="bg-category7 h-1"></div>
+    </div>
+    <div class="flex xl:flex-col xl:gap-4" id="mainnav">
+      <f:for each="{topCategories}" as="topCat">
+      <f:link.action action="list" arguments="{categoryUid: topCat.uid}" title="{topCat.title}" id="catnav_{topCat.uid}" class="flex flex-col w-full items-center">
+        <f:if condition="{topCat.uid} == {activeCategoryUid}">
+          <f:then>
+            <span class="bg-category{topCat.uid} p-2 rounded-lg">
+              <svg class="size-6 sm:size-8 fill-white mx-auto"><use xlink:href="#icon-cat{topCat.uid}"></use></svg>
+            </span>
+            <span class="text-sm mt-1">{topCat.title}</span>
+          </f:then>
+          <f:else>
+            <span class="bg-neutral-300 dark:bg-neutral-800 p-2 rounded-lg">
+              <svg class="size-6 sm:size-8 fill-white mx-auto"><use xlink:href="#icon-cat{topCat.uid}"></use></svg>
+            </span>
+            <span class="text-sm font-extralight mt-1">{topCat.title}</span>
+          </f:else>
+        </f:if>
+      </f:link.action>
+      </f:for>
+    </div>
 	</div>
 	
 	<!-- INHALT -->
-	<div class="flex flex-col xl:flex-row w-full h-full relative order-1 xl:order-2" id="inhaltcontainer">
-		<div class="w-full xl:w-1/2 overflow-auto">
-			<div class="w-full grid grid-cols-1 gap-5 xl:px-5 ">
+	<div class="flex flex-col xl:flex-row w-full h-full relative order-1 xl:order-2 bg-center bg-no-repeat bg-cover xl:bg-none" id="inhaltcontainer">
+		<div class="w-full h-full xl:h-auto xl:w-1/2 overflow-auto dark:bg-black/80 xl:bg-transparent">
+			<div class="w-full h-full xl:h-auto grid grid-cols-1 gap-5 p-5 pb-10 xl:py-0">
 			<f:for each="{subcategories}" as="subcat">
 				<div class="tx-hisnulmuslim-app-subcat">
 					<h2 class="font-semibold text-lg px-7 lg:px-10 pt-5 pb-2">{subcat.subcategory.title}</h2>
@@ -190,7 +212,7 @@
 		</div>
 		<div class="hidden xl:block xl:w-1/2 pr-5">
 			<div class="bg-primary bg-center bg-no-repeat bg-cover rounded-2xl xl:mx-5 w-full h-full relative" id="catbildwrap">
-				<div class="xl:bg-transparent dark:bg-neutral-900/40 h-full rounded-2xl p-10 mr-5 mb-5 w-full"></div>
+          <div class="xl:bg-transparent dark:bg-neutral-900/40 h-full rounded-2xl p-10 mr-5 mb-5 w-full"></div>
 			</div>
 		</div>
 	</div>
