@@ -71,6 +71,7 @@ return [
                 'type' => 'inline',
                 'foreign_table' => 'tx_hisnulmuslim_domain_model_duaitem',
                 'foreign_field' => 'dua',
+                'foreign_sortby' => 'sorting',
                 'appearance' => [
                     'collapseAll' => 1,
                     'newRecordLinkAddTitle' => true,

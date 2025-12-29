@@ -111,41 +111,68 @@
 </svg>
 
 <header class="w-full px-6 py-5 shrink-0">
-	<f:link.action action="index" class="w-fit mx-auto flex items-center gap-5">
+	<f:link.action action="index" class="w-fit mx-auto flex items-center gap-2 xl:gap-4 h-10" id="hmlogotop">
     <svg class="size-10 fill-hm_primary"><use xlink:href="#icon-logo"></use></svg>
     <h1 class="text-xl font-bold tracking-tight text-hm_primary leading-none">Hisnul Muslim</h1>
 	</f:link.action>
+  <div class="relative w-96 mx-auto">
+    <button type="button" id="search_close" class="hidden absolute top-1 left-1 items-center justify-center">
+      <svg stroke-width="1.5" class="size-7 stroke-primary"><use xlink:href="#icon-x"></use></svg>
+      <span class="sr-only">Close search</span>
+    </button>
+    <f:form action="search" method="post">
+      <f:form.textfield class="hidden text-primary py-3 px-10 h-10 leading-tight focus:outline-none border-b-1 border-neutral-400" id="searchfield" name="query" value="{query}" placeholder="Bittgebete durchsuchen" />
+		</f:form>
+  </div>
+  <div class="fixed top-7 right-5 xl:right-8" id="search_open">
+    <svg stroke-width="1.5" class="size-6 fill-primary"><use xlink:href="#icon-search"></use></svg>
+  </div>
 </header>
 
-<button class="fixed top-5 right-5 xl:right-8 text-secondary cursor-pointer p-2 rounded-lg" onclick="toggleDarkMode()">
-  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-7">
-    <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" />
-  </svg>
-</button>
+<div class="hidden lg:grid pl-9 pr-6 mb-5 w-full grid-cols-7">
+  <div class="bg-category1 h-1"></div>
+  <div class="bg-category2 h-1"></div>
+  <div class="bg-category3 h-1"></div>
+  <div class="bg-category4 h-1"></div>
+  <div class="bg-category5 h-1"></div>
+  <div class="bg-category6 h-1"></div>
+  <div class="bg-category7 h-1"></div>
+</div>
 
-<main class="flex-1 overflow-auto h-full flex flex-col xl:flex-row px-5">
+<main class="flex-1 overflow-auto h-full flex flex-col xl:flex-row xl:px-5 pb-24 xl:pb-0">
   <!-- NAVIGATION -->
-  <div class="w-full xl:w-fit flex flex-row xl:flex-col xl:px-4 xl:pr-3 sm:gap-2 xl:gap-4 order-2 xl:order-1 mt-5 xl:mt-0" id="mainnav">
+  <div class="fixed z-30 bottom-[60px] left-0 w-full xl:static xl:order-1 py-1 xl:py-0 xl:w-fit xl:px-4 xl:pr-3">
+    <div class="grid lg:hidden mb-5 w-full grid-cols-7">
+      <div class="bg-category1 h-1"></div>
+      <div class="bg-category2 h-1"></div>
+      <div class="bg-category3 h-1"></div>
+      <div class="bg-category4 h-1"></div>
+      <div class="bg-category5 h-1"></div>
+      <div class="bg-category6 h-1"></div>
+      <div class="bg-category7 h-1"></div>
+    </div>
+    <div class="flex xl:flex-col xl:gap-4" id="mainnav">
     <f:for each="{topCategories}" as="topCat">
       <f:link.action action="list" arguments="{categoryUid: topCat.uid}" title="{topCat.title}" id="catnav_{topCat.uid}" class="flex flex-col w-full items-center">
         <span class="bg-category{topCat.uid} p-2 rounded-lg">
-          <svg class="size-6 sm:size-8 fill-white mx-auto"><use xlink:href="#icon-cat{topCat.uid}"></use></svg>
+          <svg class="size-8 sm:size-10 fill-white mx-auto"><use xlink:href="#icon-cat{topCat.uid}-inactive"></use></svg>
         </span>
         <span class="text-sm font-extralight mt-1">{topCat.title}</span>
       </f:link.action>
     </f:for>
+    </div>
   </div>
   <!-- INHALT -->
-  <div class="overflow-hidden bg-bottom xl:bg-bottom-right bg-no-repeat bg-cover xl:bg-contain rounded-2xl
+  <div class="overflow-hidden bg-bottom xl:bg-bottom-right bg-no-repeat bg-cover xl:bg-contain xl:rounded-2xl
     bg-[url(https://www.hisnulmuslim.de/fileadmin/HisnulMuslim/Hintergruende/0_STARTSEITE.jpg)] bg-white
     xl:bg-[url(https://www.hisnulmuslim.de/fileadmin/HisnulMuslim/Hintergruende/0_STARTSEITE_XL.jpg)]
-    xl:mx-5 w-full h-full relative order-1 xl:order-2" id="inhaltcontainer">
+    xl:ml-5 w-full h-full relative order-1 xl:order-2" id="inhaltcontainer">
     <div class="bg-gradient-to-b xl:bg-gradient-to-r
-      from-neutral-200/80 to-neutral-300/70 xl:from-neutral-300/60 xl:to-neutral-200/10
+      from-neutral-200/70 to-neutral-300/70 xl:from-neutral-300/60 xl:to-neutral-200/10
       dark:from-neutral-900/95 dark:to-neutral-900/80 
       w-full h-full">
       <div class="px-10 py-7 xl:p-15">
-        <h1 class="text-3xl md:text-4xl xl:text-6xl 2xl:text-7xl mb-2 lg:mb-6 xl:mb-12 font-light tracking-tight text-hm_primary leading-none">Die Hisnul Muslim App -<br class="hidden sm:inline" /> das Original, neu gedacht.</h1>
+        <h1 class="text-4xl xl:text-6xl 2xl:text-7xl mb-4 lg:mb-6 xl:mb-12 font-light tracking-tight text-hm_primary leading-none">Die Hisnul Muslim App -<br class="hidden sm:inline" /> das Original, neu gedacht.</h1>
         <span class="text-base lg:text-xl text-primary">Alle Bittgebete aus dem klassischen Hisnul Muslim,<br class="hidden sm:inline" /> neu kategorisiert für einfachen Zugang.</span>
       </div>
     </div>
@@ -159,3 +186,9 @@
     <li><a class="transition opacity-50 hover:opacity-100" href="/cookies">Cookies</a></li>
   </ul>
 </footer>
+
+<button class="fixed bottom-2 right-5 text-secondary cursor-pointer p-2 rounded-lg" onclick="toggleDarkMode()">
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+    <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" />
+  </svg>
+</button>

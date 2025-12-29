@@ -16,10 +16,12 @@ function toggleDarkMode() {
   );
 }
 
+let currentDuaURL = "";
+
 $(document).ready(function() {
     // Bestehende Such-Funktionalität
     $("#search_open").click(function() {
-        $("#pageheadline").hide();
+        $("#hmlogotop").hide();
         $("#mobilemenu_opener").hide();
         $("#search_close").show();
         $("#searchfield").show();
@@ -27,10 +29,22 @@ $(document).ready(function() {
     });
     
     $("#search_close").click(function() {
-        $("#pageheadline").show();
+        $("#hmlogotop").show();
         $("#mobilemenu_opener").show();
         $("#search_close").hide();
         $("#searchfield").hide();
+    });
+
+    $(document).on("click", ".open_transliteration", function() {
+      $("#transliteration-drawer").removeClass("-translate-x-full");
+      $("#transliteration-overlay").removeClass("hidden");
+      return false;
+    });
+
+    $(document).on("click", "#transliteration-overlay, #closeDrawer-transliteration", function() {
+      $("#transliteration-drawer").addClass("-translate-x-full");
+      $("#transliteration-overlay").addClass("hidden");
+      return false;
     });
 
     // AJAX für Kapitel-Links - Pure JSON Version
@@ -40,23 +54,25 @@ $(document).ready(function() {
         const $link = $(this);
         const chapterTitle = $link.data('chapter-title');
         const ajaxUrl = $link.data('ajax-url');
+        currentDuaURL = $link.attr('href');
+        $("#kapitel-url").val(currentDuaURL);
         
         // Titel im Drawer setzen
         $("#drawer-title").text(chapterTitle);
         
         // WICHTIG: Content sofort leeren beim Öffnen eines neuen Chapters
         // Verhindert, dass alte Daten sichtbar bleiben
-        $("#drawer-content").html('<div class="w-full animate-pulse">'+
-            '<div class="w-full h-full flex flex-col items-start">'+
-            '<div class="h-8 w-full bg-gray-300 mb-3 xl:w-4/5"></div>'+
-            '<div class="h-10 w-full bg-gray-300 mb-3"></div>'+
-            '<div class="h-5 w-full bg-gray-300 xl:w-3/5"></div>'+
+        $("#drawer-content").html('<div class="bittgebeteloading">'+
+            '<div>'+
+                '<div class="h-8 mb-3 xl:w-4/5"></div>'+
+                '<div class="h-10 mb-3"></div>'+
+                '<div class="h-5 xl:w-3/5"></div>'+
             '</div>'+
         '</div>');
         
         // Drawer öffnen
         $("#cart-drawer").removeClass("translate-x-full");
-        $("#overlay").removeClass("hidden");
+        $("#cart-overlay").removeClass("hidden");
         
         // Ajax-Request
         $.ajax({
@@ -92,9 +108,9 @@ $(document).ready(function() {
     });
 
     // Drawer schließen - KEIN Leeren hier!
-    $("#overlay, #closeDrawer").on("click", function() {
+    $("#cart-overlay, #closeDrawer").on("click", function() {
         $("#cart-drawer").addClass("translate-x-full");
-        $("#overlay").addClass("hidden");
+        $("#cart-overlay").addClass("hidden");
         // Content bleibt erhalten für schnelles Wiederöffnen
         return false;
     });
@@ -103,8 +119,24 @@ $(document).ready(function() {
     $(document).on('keydown', function(e) {
         if (e.key === 'Escape' && !$("#cart-drawer").hasClass('translate-x-full')) {
             $("#cart-drawer").addClass("translate-x-full");
-            $("#overlay").addClass("hidden");
+            $("#cart-overlay").addClass("hidden");
         }
+    });
+
+    $(document).on("click", ".shareDua", function(e) {
+        e.preventDefault();
+        openShareModal();
+        // navigator.clipboard.writeText(currentDuaURL);
+        // alert("Dua URL in die Zwischenablage kopiert.")
+        return false;
+    });
+
+    $(document).on("click", '[data-modal-hide="share-modal"], [data-modal-hide="share-modal"]', function(e) {
+        e.preventDefault();
+        $("#share-modal").addClass("hidden");
+        $("#share-modal").removeClass("flex");
+        $("#share-modal").attr("aria-hidden", "true");
+        return false;
     });
 });
 
@@ -129,15 +161,18 @@ function buildChapterHTML(data) {
     // Duas durchlaufen
     if (data.duas && data.duas.length > 0) {
         data.duas.forEach(function(dua, duaIndex) {
-            html += '<article class="tx-hisnulmuslim-app-subcat" data-dua-index="' + duaIndex + '">';
-            
-            // Nummerierung
-            html += '  <div class="nummerierung">';
-            html += escapeHtml(data.chapter.chapterId) + ' / ' + escapeHtml(dua.duaId);
+
+            html += '  <div class="w-full relative my-8">';
+            html += '       <div class="h-0.5 w-full bg-hm_primary dark:bg-neutral-100"></div>';
+            html += '       <div class="w-fit mx-auto bg-neutral-100 dark:bg-neutral-900 p-5 -my-11">';
+            html += '           <svg class="size-10 fill-hm_primary dark:fill-neutral-100"><use xlink:href="#icon-logo"></use></svg>';
+            html += '       </div>';
             html += '  </div>';
             
+            html += '<article class="tx-hisnulmuslim-app-dua" data-dua-index="' + duaIndex + '">';
             // Items Liste
-            html += '  <ul class="px-10 py-4 font-normal text-sm">';
+            html += ' <div class="w-full">';
+            html += '  <ul>';
             
             // Prüfen ob items ein Array ist
             if (Array.isArray(dua.items) && dua.items.length > 0) {
@@ -154,7 +189,20 @@ function buildChapterHTML(data) {
                 console.error('Items ist kein Array:', dua.items);
             }
             
+            
             html += '  </ul>';
+            html += '  <div class="w-full py-5 flex items-center justify-center">';
+            html += '       <ul class="text-sm flex">';
+            html += '           <li class="m-0 mr-2 p-0"><button data-modal-target="share-modal" data-modal-toggle="share-modal" class="shareDua cursor-pointer" type="button"><svg class="size-5"><use xlink:href="#icon-share"></use></svg></button></li>';
+            html += '           <li class="m-0 mr-2 p-0"><a href="#" class="open_transliteration"><svg class="ml-4 size-5 fill-primary"><use xlink:href="#icon-transkript"></use></svg></a></li>';
+            html += '       </ul>';
+            html += '       <div class="ml-auto text-sm text-neutral-400 flex gap-5">';
+            // html += '           <div>Hisnul Muslim</div>';
+            html += '           <div>Kapitel '+escapeHtml(data.chapter.chapterId)+'</div>';
+            html += '           <div>Bittgebet '+escapeHtml(dua.duaId)+'</div>';
+            html += '       </div>';
+            html += '  </div>';
+            html += ' </div>';
             html += '</article>';
         });
     } else {
@@ -194,4 +242,14 @@ function escapeHtml(text) {
         "'": '&#039;'
     };
     return String(text).replace(/[&<>"']/g, function(m) { return map[m]; });
+}
+
+// Funktion zum Öffnen des Share-Modals
+function openShareModal() {
+    const modal = document.getElementById('share-modal');
+    if (modal) {
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+        modal.setAttribute('aria-hidden', 'false');
+    }
 }

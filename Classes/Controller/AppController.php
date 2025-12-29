@@ -74,7 +74,7 @@ class AppController extends ActionController
      *
      * @return string
      */
-    public function listAction(int $categoryUid = 1): ResponseInterface
+    public function listAction(int $categoryUid = 1, int $chapterUid = 0): ResponseInterface
     {
         // Alle Top-Kategorien holen
         $topCategories = $this->categoryRepository->findTopLevel();
@@ -99,6 +99,11 @@ class AppController extends ActionController
             //     'category' => $topCategory,
             //     'subcategories' => $subcategoriesData
             // ];
+        }
+        
+        if ($chapterUid > 0) {
+            $chapter = $this->chapterRepository->findByUid($chapterUid);
+            $this->view->assign('chapter', $chapter);
         }
 
         $this->view->assign('topCategories', $topCategories);
@@ -170,9 +175,9 @@ class AppController extends ActionController
             $itemsArray = $itemsStorage->toArray();
 
             // Manuell nach sorting sortieren
-            usort($itemsArray, function($a, $b) {
-                return $a->getSorting() <=> $b->getSorting();
-            });
+            // usort($itemsArray, function($a, $b) {
+            //     return $a->getSorting() <=> $b->getSorting();
+            // });
 
             foreach ($itemsArray as $item) {
                 $duaData['items'][] = [
@@ -198,6 +203,7 @@ class AppController extends ActionController
      */
     public function searchAction(string $query = ''): ResponseInterface
     {
+        $topCategories = $this->categoryRepository->findTopLevel();
         $results = [];
 
         if (!empty($query)) {
@@ -206,6 +212,7 @@ class AppController extends ActionController
         }
 
         $this->view->assignMultiple([
+            'topCategories' => $topCategories,
             'query' => $query,
             'results' => $results,
         ]);
