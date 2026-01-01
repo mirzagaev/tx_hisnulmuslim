@@ -120,7 +120,7 @@
 </svg>
 
 <header class="w-full px-6 py-5 shrink-0">
-	<f:link.page pageUid="1" class="w-fit mx-auto flex items-center gap-2 xl:gap-4 h-10" id="hmlogotop">
+	<f:link.page pageUid="1" class="w-fit mx-auto xl:ml-5 flex items-center gap-2 xl:gap-4 h-10" id="hmlogotop">
 		<svg class="size-10 fill-hm_primary dark:fill-white"><use xlink:href="#icon-logo"></use></svg>
 		<h1 class="text-xl font-bold tracking-tight text-hm_primary dark:text-white leading-none">Hisnul Muslim</h1>
 	</f:link.page>
@@ -151,8 +151,16 @@
 	</div>
 
 	<!-- Ajax Content wird hier geladen -->
-	<div class="h-full w-full text-primary overflow-auto relative p-7 lg:p-10 flex flex-col gap-8" id="drawer-content">
-		<div class="text-center py-20 text-neutral-500">Lädt Bittgebete...</div>
+	<div class="h-full w-full text-primary overflow-auto relative p-7 lg:p-10 flex flex-col" id="drawer-content">
+		<div class="text-center py-20 text-neutral-500">
+      <div class="bittgebeteloading">
+        <div>
+          <div class="h-8 mb-3 xl:w-4/5"></div>
+          <div class="h-10 mb-3"></div>
+          <div class="h-5 xl:w-3/5"></div>
+        </div>
+      </div>
+    </div>
 	</div>
 </div>
 
@@ -443,6 +451,44 @@
   </div>
 </div>
 
+<!-- Share Clipboard modal -->
+<div id="share-modal" tabindex="-1" aria-hidden="true" class="hidden bg-neutral-800/40 dark:bg-neutral-800/80 overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-70 justify-center items-center w-full md:inset-0 h-full max-h-full">
+  <div class="relative p-4 w-full max-w-2xl max-h-full">
+    <!-- Modal content -->
+    <div class="relative bg-white dark:bg-neutral-900 rounded-lg shadow-sm p-4 md:p-6">
+      <!-- Modal header -->
+      <div class="flex items-center justify-between p-4 md:p-5">
+        <h3 class="text-lg text-heading font-medium">Kapitel teilen</h3>
+        <button type="button" class="text-body bg-transparent hover:bg-neutral-tertiary hover:text-heading rounded-lg text-sm w-9 h-9 ms-auto inline-flex justify-center items-center cursor-pointer" data-modal-hide="share-modal">
+          <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18 17.94 6M18 18 6.06 6"/></svg>
+          <span class="sr-only">Close modal</span>
+        </button>
+      </div>
+      <!-- Modal body -->
+      <div class="px-4 pb-4 md:px-5 md:pb-5">
+        <label for="kapitel-url" class="block mb-2.5 text-sm font-medium text-heading">Kapitel teilen:</label>
+        <div class="relative mb-4 copyToClipboardBtns">
+          <input id="kapitel-url" type="text" class="col-span-6 bg-neutral-secondary-medium border border-default-medium text-body text-sm rounded-lg focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body" value="" disabled readonly />
+          <button data-copy-to-clipboard-target="kapitel-url" data-tooltip-target="tooltip-kapitel-url" class="bg-primary hover:bg-neutral-200 dark:hover:bg-neutral-800 focus:bg-neutral-200 absolute end-1.5 top-1/2 -translate-y-1/2 text-body bg-neutral-secondary-medium hover:bg-neutral-quaternary hover:text-heading rounded p-2 inline-flex items-center justify-center">
+            <span id="default-icon-kapitel-url">
+              <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 4h3a1 1 0 0 1 1 1v15a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h3m0 3h6m-6 5h6m-6 4h6M10 3v4h4V3h-4Z"/></svg>
+            </span>
+            <span id="success-icon-kapitel-url" class="hidden">
+              <svg class="w-4 h-4 text-fg-brand" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 4h3a1 1 0 0 1 1 1v15a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h3m0 3h6m-6 7 2 2 4-4m-5-9v4h4V3h-4Z"/></svg>
+            </span>
+          </button>
+          <div id="tooltip-kapitel-url" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-primary bg-primary transition-opacity duration-300 bg-dark rounded-lg shadow-xs opacity-0 tooltip">
+            <span id="default-tooltip-message-kapitel-url">In die Zwischenablage kopieren</span>
+            <span id="success-tooltip-message-kapitel-url" class="hidden">Kopiert!</span>
+            <div class="tooltip-arrow" data-popper-arrow></div>
+          </div>
+        </div>
+        <button data-modal-hide="share-modal" type="button" class="text-body bg-neutral-secondary-medium box-border border border-default-medium hover:bg-neutral-tertiary-medium hover:text-heading focus:ring-4 focus:ring-neutral-tertiary shadow-xs font-medium leading-5 rounded-lg text-sm px-4 py-2.5 focus:outline-none cursor-pointer">Schließen</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="hidden lg:grid pl-9 pr-6 mb-5 w-full grid-cols-7">
   <div class="bg-category1 h-1"></div>
   <div class="bg-category2 h-1"></div>
@@ -519,7 +565,7 @@
   </ul>
 </footer>
 
-<button class="fixed bottom-2 right-5 text-secondary cursor-pointer p-2 rounded-lg" onclick="toggleDarkMode()">
+<button class="fixed bottom-2 right-5 text-secondary cursor-pointer bg-primary p-3 rounded-full shadow-lg" onclick="toggleDarkMode()">
 	<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
 		<path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" />
 	</svg>

@@ -138,6 +138,11 @@ $(document).ready(function() {
         $("#share-modal").attr("aria-hidden", "true");
         return false;
     });
+
+    $(".copyToClipboardBtns button").click(function() {
+      $(this).find("span:first-child").hide();
+      $(this).find(".hidden").show();
+    });
 });
 
 /**
@@ -162,10 +167,9 @@ function buildChapterHTML(data) {
     if (data.duas && data.duas.length > 0) {
         data.duas.forEach(function(dua, duaIndex) {
 
-            html += '  <div class="w-full relative my-8">';
-            html += '       <div class="h-0.5 w-full bg-hm_primary dark:bg-neutral-100"></div>';
-            html += '       <div class="w-fit mx-auto bg-neutral-100 dark:bg-neutral-900 p-5 -my-11">';
-            html += '           <svg class="size-10 fill-hm_primary dark:fill-neutral-100"><use xlink:href="#icon-logo"></use></svg>';
+            html += '  <div class="w-full relative my-3">';
+            html += '       <div class="w-fit mx-auto">';
+            html += '           <svg class="size-10 duaicon"><use xlink:href="#icon-logo"></use></svg>';
             html += '       </div>';
             html += '  </div>';
             
