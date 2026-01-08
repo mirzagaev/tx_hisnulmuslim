@@ -111,7 +111,7 @@
 </svg>
 
 <header class="w-full px-6 py-5 shrink-0">
-	<f:link.action action="index" class="w-fit mx-auto xl:ml-5 flex items-center gap-2 xl:gap-4 h-10" id="hmlogotop">
+	<f:link.action action="index" class="w-fit mx-auto lg:ml-5 flex items-center gap-2 lg:gap-4 h-10" id="hmlogotop">
     <svg class="size-10 fill-hm_primary dark:fill-white"><use xlink:href="#icon-logo"></use></svg>
     <h1 class="text-xl font-bold tracking-tight text-hm_primary dark:text-white leading-none">Hisnul Muslim</h1>
 	</f:link.action>
@@ -124,7 +124,7 @@
       <f:form.textfield class="hidden text-primary py-3 px-10 h-10 leading-tight focus:outline-none border-b-1 border-neutral-400" id="searchfield" name="query" value="{query}" placeholder="Bittgebete durchsuchen" />
 		</f:form>
   </div>
-  <div class="fixed top-7 right-5 xl:right-8" id="search_open">
+  <div class="fixed top-7 right-5 lg:right-8" id="search_open">
     <svg stroke-width="1.5" class="size-6 fill-primary"><use xlink:href="#icon-search"></use></svg>
   </div>
 </header>
@@ -139,9 +139,9 @@
   <div class="bg-category7 h-1"></div>
 </div>
 
-<main class="flex-1 overflow-auto h-full flex flex-col xl:flex-row xl:px-5 pb-24 xl:pb-0">
+<main class="flex-1 overflow-auto h-full flex flex-col lg:flex-row lg:px-5 pb-24 lg:pb-0">
   <!-- NAVIGATION -->
-  <div class="fixed z-30 bottom-[60px] left-0 w-full xl:static xl:order-1 py-1 xl:py-0 xl:w-fit xl:px-4 xl:pr-3">
+  <div class="fixed z-30 bottom-[60px] left-0 w-full lg:static lg:order-1 py-1 lg:py-0 lg:w-fit lg:px-4 lg:pr-3">
     <div class="grid lg:hidden mb-5 w-full grid-cols-7">
       <div class="bg-category1 h-1"></div>
       <div class="bg-category2 h-1"></div>
@@ -151,7 +151,7 @@
       <div class="bg-category6 h-1"></div>
       <div class="bg-category7 h-1"></div>
     </div>
-    <div class="flex xl:flex-col xl:gap-4" id="mainnav">
+    <div class="flex lg:flex-col lg:gap-4" id="mainnav">
     <f:for each="{topCategories}" as="topCat">
       <f:link.action action="list" arguments="{categoryUid: topCat.uid}" title="{topCat.title}" id="catnav_{topCat.uid}" class="flex flex-col w-full items-center">
         <span class="bg-category{topCat.uid} p-2 rounded-lg">
@@ -163,23 +163,23 @@
     </div>
   </div>
   <!-- INHALT -->
-  <div class="overflow-hidden bg-bottom xl:bg-bottom-right bg-no-repeat bg-cover xl:bg-contain xl:rounded-2xl
+  <div class="overflow-hidden bg-bottom lg:bg-bottom-right bg-no-repeat bg-cover lg:bg-contain lg:rounded-2xl
     bg-[url(https://www.hisnulmuslim.de/fileadmin/HisnulMuslim/Hintergruende/0_STARTSEITE.jpg)] bg-white
-    xl:bg-[url(https://www.hisnulmuslim.de/fileadmin/HisnulMuslim/Hintergruende/0_STARTSEITE_XL.jpg)]
-    xl:ml-5 w-full h-full relative order-1 xl:order-2" id="inhaltcontainer">
-    <div class="bg-gradient-to-b xl:bg-gradient-to-r
-      from-neutral-200/70 to-neutral-300/70 xl:from-neutral-300/60 xl:to-neutral-200/10
+    lg:bg-[url(https://www.hisnulmuslim.de/fileadmin/HisnulMuslim/Hintergruende/0_STARTSEITE_XL.jpg)]
+    lg:ml-5 w-full h-full relative order-1 lg:order-2" id="inhaltcontainer">
+    <div class="bg-gradient-to-b lg:bg-gradient-to-r
+      from-neutral-200/70 to-neutral-300/70 lg:from-neutral-300/60 lg:to-neutral-200/10
       dark:from-neutral-900/95 dark:to-neutral-900/80 
       w-full h-full">
-      <div class="px-10 py-7 xl:p-15">
-        <h1 class="text-4xl xl:text-6xl 2xl:text-7xl mb-4 lg:mb-6 xl:mb-12 font-light tracking-tight text-hm_primary leading-none">Die Hisnul Muslim App -<br class="hidden sm:inline" /> das Original, neu gedacht.</h1>
+      <div class="px-10 py-7 lg:p-15">
+        <h1 class="text-4xl lg:text-6xl 2lg:text-7xl mb-4 lg:mb-6 lg:mb-12 font-light tracking-tight text-hm_primary leading-none">Die Hisnul Muslim App -<br class="hidden sm:inline" /> das Original, neu gedacht.</h1>
         <span class="text-base lg:text-xl text-primary">Alle Bittgebete aus dem klassischen Hisnul Muslim,<br class="hidden sm:inline" /> neu kategorisiert für einfachen Zugang.</span>
       </div>
     </div>
   </div>
 </main>
 
-<footer class="w-fit xl:ml-auto p-5 text-xs shrink-0 mx-auto">
+<footer class="w-fit lg:ml-auto p-5 text-xs shrink-0 mx-auto">
   <ul class="w-fit flex flex-row gap-2 lg:gap-4 px-2">
     <li><a class="transition opacity-50 hover:opacity-100" href="/impressum">Impressum</a></li>
     <li><a class="transition opacity-50 hover:opacity-100" href="/datenschutzerklaerung">Datenschutzerklärung</a></li>

@@ -64,9 +64,9 @@ $(document).ready(function() {
         // Verhindert, dass alte Daten sichtbar bleiben
         $("#drawer-content").html('<div class="bittgebeteloading">'+
             '<div>'+
-                '<div class="h-8 mb-3 xl:w-4/5"></div>'+
+                '<div class="h-8 mb-3 lg:w-4/5"></div>'+
                 '<div class="h-10 mb-3"></div>'+
-                '<div class="h-5 xl:w-3/5"></div>'+
+                '<div class="h-5 lg:w-3/5"></div>'+
             '</div>'+
         '</div>');
         
