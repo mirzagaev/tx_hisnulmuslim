@@ -17,6 +17,7 @@ function toggleDarkMode() {
 }
 
 let currentDuaURL = "";
+let isDrawerOpen = false; // Flag to track if the main chapter/dua drawer is open
 
 $(document).ready(function() {
     // Bestehende Such-Funktionalität
@@ -74,6 +75,11 @@ $(document).ready(function() {
         $("#cart-drawer").removeClass("translate-x-full");
         $("#cart-overlay").removeClass("hidden");
         
+        // Push a new state to the browser history when the drawer opens.
+        // This allows the back button to close the drawer.
+        history.pushState({ drawerOpen: true, duaUrl: currentDuaURL }, '', currentDuaURL);
+        isDrawerOpen = true; // Update internal state
+        
         // Ajax-Request
         $.ajax({
             url: ajaxUrl,
@@ -111,7 +117,13 @@ $(document).ready(function() {
     $("#cart-overlay, #closeDrawer").on("click", function() {
         $("#cart-drawer").addClass("translate-x-full");
         $("#cart-overlay").addClass("hidden");
-        // Content bleibt erhalten für schnelles Wiederöffnen
+        
+        // Wenn der Drawer über einen Link geöffnet wurde (History State gepusht),
+        // gehen wir in der History zurück, um den State zu bereinigen.
+        if (isDrawerOpen) {
+            isDrawerOpen = false;
+            history.back();
+        }
         return false;
     });
     
@@ -120,6 +132,23 @@ $(document).ready(function() {
         if (e.key === 'Escape' && !$("#cart-drawer").hasClass('translate-x-full')) {
             $("#cart-drawer").addClass("translate-x-full");
             $("#cart-overlay").addClass("hidden");
+            
+            if (isDrawerOpen) {
+                isDrawerOpen = false;
+                history.back();
+            }
+        }
+    });
+
+    // Handle browser back/forward button clicks (z.B. Wischgeste am Smartphone)
+    $(window).on('popstate', function(event) {
+        const drawerIsVisuallyOpen = !$("#cart-drawer").hasClass('translate-x-full');
+
+        // Wenn der Drawer offen ist UND der neue State sagt "nicht offen" (oder null ist)
+        if (drawerIsVisuallyOpen && (!event.originalEvent.state || !event.originalEvent.state.drawerOpen)) {
+            $("#cart-drawer").addClass("translate-x-full");
+            $("#cart-overlay").addClass("hidden");
+            isDrawerOpen = false;
         }
     });
 
@@ -131,7 +160,7 @@ $(document).ready(function() {
         return false;
     });
 
-    $(document).on("click", '[data-modal-hide="share-modal"], [data-modal-hide="share-modal"]', function(e) {
+    $(document).on("click", '.close-share-modal', function(e) {
         e.preventDefault();
         $("#share-modal").addClass("hidden");
         $("#share-modal").removeClass("flex");
@@ -151,7 +180,7 @@ $(document).ready(function() {
 function buildChapterHTML(data) {
     let html = '';
     
-    console.log('Building HTML for:', data.duas.length, 'duas'); // Debug
+    // console.log('Building HTML for:', data.duas.length, 'duas'); // Debug
     
     // Chapter Header (optional)
     if (data.chapter.categoryTitle) {
@@ -197,10 +226,10 @@ function buildChapterHTML(data) {
             html += '  </ul>';
             html += '  <div class="w-full py-5 flex items-center justify-center">';
             html += '       <ul class="text-sm flex">';
-            html += '           <li class="m-0 mr-2 p-0"><button data-modal-target="share-modal" data-modal-toggle="share-modal" class="shareDua cursor-pointer" type="button"><svg class="size-5"><use xlink:href="#icon-share"></use></svg></button></li>';
+            html += '           <li class="m-0 mr-2 p-0"><button class="shareDua cursor-pointer" type="button"><svg class="size-5"><use xlink:href="#icon-share"></use></svg></button></li>';
             html += '           <li class="m-0 mr-2 p-0"><a href="#" class="open_transliteration"><svg class="ml-4 size-5 fill-primary"><use xlink:href="#icon-transkript"></use></svg></a></li>';
             html += '       </ul>';
-            html += '       <div class="ml-auto text-sm text-neutral-400 flex gap-5">';
+            html += '       <div class="ml-auto text-xs text-neutral-400 flex gap-5">';
             // html += '           <div>Hisnul Muslim</div>';
             html += '           <div>Kapitel '+escapeHtml(data.chapter.chapterId)+'</div>';
             html += '           <div>Bittgebet '+escapeHtml(dua.duaId)+'</div>';

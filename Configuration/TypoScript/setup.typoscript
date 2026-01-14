@@ -211,6 +211,25 @@ config {
     concatenateCss = 0
 }
 
+ajaxApi = PAGE
+ajaxApi {
+  typeNum = 20261
+  config {
+    disableAllHeaderCode = 1
+    additionalHeaders.10.header = Content-Type: application/json
+    no_cache = 0
+  }
+
+  10 = USER
+  10 {
+    userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
+    extensionName = Hisnulmuslim
+    pluginName = Api
+    vendorName = Webzadev
+    action = show
+  }
+}
+
 showApi = PAGE
 showApi {
   typeNum = 20262
@@ -233,21 +252,22 @@ showApi {
   }
 }
 
-ajaxApi = PAGE
-ajaxApi {
-  typeNum = 20261
-  config {
-    disableAllHeaderCode = 1
-    additionalHeaders.10.header = Content-Type: application/json
-    no_cache = 0
-  }
-
-  10 = USER
-  10 {
-    userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
-    extensionName = Hisnulmuslim
-    pluginName = Api
-    vendorName = Webzadev
-    action = show
-  }
+ajax_content = PAGE
+ajax_content {
+    typeNum = 20263
+    config {
+        disableAllHeaderCode = 1
+        xhtml_cleaning = 0
+        admPanel = 0
+        debug = 0
+        no_cache = 1
+    }
+    # Hier wird nur die Hauptspalte (colPos 0) gerendert
+    10 = RECORDS
+    10 {
+        source.data = page:uid
+        tables = tt_content
+        # Optional: Nur bestimmte Inhaltselemente laden
+        conf.tt_content =< tt_content
+    }
 }

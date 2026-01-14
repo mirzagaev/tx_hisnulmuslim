@@ -1,0 +1,91 @@
+base: 'https://www.hisnulmuslim.de/'
+languages:
+  -
+    title: Deutsch
+    enabled: true
+    locale: de_DE.UTF-8
+    hreflang: de-DE
+    base: /
+    websiteTitle: ''
+    navigationTitle: Deutsch
+    flag: de
+    languageId: 0
+rootPageId: 1
+routeEnhancers:
+  HisnulMuslimApp:
+    type: Extbase
+    limitToPages:
+      - 1
+    extension: Hisnulmuslim
+    plugin: App
+    routes:
+      -
+        routePath: '/{categoryUid}'
+        _controller: 'App::list'
+        _arguments:
+          categoryUid: categoryUid
+      -
+        routePath: '/{categoryUid}/dua/{chapterUid}'
+        _controller: 'App::list'
+        _arguments:
+          categoryUid: categoryUid
+          chapterUid: chapterUid
+      -
+        routePath: '/{categoryUid}/dua/{chapterUid}'
+        _controller: 'App::show'
+        _arguments:
+          categoryUid: categoryUid
+          chapterUid: chapterUid
+    defaultController: 'App::index'
+    aspects:
+      categoryUid:
+        type: PersistedAliasMapper
+        tableName: sys_category
+        routeFieldName: slug
+      chapterUid:
+        type: PersistedAliasMapper
+        tableName: tx_hisnulmuslim_domain_model_chapter
+        routeFieldName: slug
+        parentField: category
+routes:
+  -
+    route: sitemap.xml
+    type: uri
+    source: 't3://page?uid=1&type=1533906435'
+sitemap:
+  categories:
+    source: records
+    config:
+      table: sys_category
+      pid: 1 
+      recursive: 0
+      # WICHTIG: Nur Kategorien nehmen, die auch einen Slug haben
+      additionalWhere: ' AND slug != ""'
+      url:
+        pageId: 1
+        fieldToParameterMap:
+          # Versuche hier den direkten Mapping-Namen aus deinem Enhancer
+          slug: tx_hisnulmuslim_app[categoryUid]
+        additionalGetParameters:
+          tx_hisnulmuslim_app[action]: list
+          tx_hisnulmuslim_app[controller]: App
+  chapters:
+    source: records
+    config:
+      table: tx_hisnulmuslim_domain_model_chapter
+      pid: 24
+      recursive: 0
+      priority: 0.5
+      changefreq: monthly
+      url:
+        pageId: 1
+        fieldToParameterMap:
+          # Das Kapitel selbst
+          slug: tx_hisnulmuslim_app[chapterUid]
+          # Die zugehörige Kategorie aus der DB-Relation holen:
+          # Ersetze 'category' durch den tatsächlichen Spaltennamen in deiner Tabelle
+          category: tx_hisnulmuslim_app[categoryUid]
+        additionalGetParameters:
+          tx_hisnulmuslim_app[action]: show
+          tx_hisnulmuslim_app[controller]: App
+websiteTitle: 'Hisnul Muslim'
