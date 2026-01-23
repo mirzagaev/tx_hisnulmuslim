@@ -11,6 +11,7 @@ class Chapter extends AbstractEntity
     protected int $chapterId = 0;
     protected string $title = '';
     protected string $titleAr = '';
+    protected string $slug = '';
 
     /**
      * @var ObjectStorage<Dua>
@@ -100,5 +101,15 @@ class Chapter extends AbstractEntity
     public function removeDua(Dua $dua): void
     {
         $this->dua->detach($dua);
+    }
+
+    public function getSlug(): string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): void
+    {
+        $this->slug = $slug;
     }
 }

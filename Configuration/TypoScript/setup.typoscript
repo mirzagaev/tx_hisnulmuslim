@@ -9,6 +9,21 @@
 ################
 <INCLUDE_TYPOSCRIPT: source="FILE:EXT:hisnulmuslim/Configuration/TypoScript/Helper/DynamicContent.typoscript">
 
+#########################
+#### CONTENT ELEMENT ####
+#########################
+lib.contentElement {
+    templateRootPaths {
+        20 = EXT:hisnulmuslim/Resources/Private/Templates/ContentElements/
+    }
+    partialRootPaths {
+        20 = EXT:hisnulmuslim/Resources/Private/Partials/ContentElements/
+    }
+    layoutRootPaths {
+        20 = EXT:hisnulmuslim/Resources/Private/Layouts/ContentElements/
+    }
+}
+
 ##############
 #### PAGE ####
 ##############
@@ -262,12 +277,71 @@ ajax_content {
         debug = 0
         no_cache = 1
     }
-    # Hier wird nur die Hauptspalte (colPos 0) gerendert
-    10 = RECORDS
+
+    10 = CONTENT
     10 {
-        source.data = page:uid
-        tables = tt_content
-        # Optional: Nur bestimmte Inhaltselemente laden
-        conf.tt_content =< tt_content
+        table = tt_content
+        select {
+            # Holt alle Elemente der aktuellen Seite (id aus der URL)
+            pidInList.data = page:uid
+            # Nur Elemente aus der Hauptspalte (normalerweise colPos 0)
+            where = colPos=0
+            orderBy = sorting
+        }
+        # Nutzt das Standard-Rendering von fluid_styled_content
+        renderObj < lib.contentElement
+        renderObj {
+            templateName.ifEmpty = Default
+        }
+    }
+}
+
+plugin.tx_seo {
+    config {
+        xmlSitemap {
+            sitemaps {
+                categories {
+                    provider = TYPO3\CMS\Seo\XmlSitemap\RecordsXmlSitemapDataProvider
+                    config {
+                        table = sys_category
+                        sortField = sorting
+                        changeFreqField = monthly
+                        pid = 24
+                        recursive = 0
+                        url {
+                            pageId = 1
+                            fieldToParameterMap {
+                                uid = tx_hisnulmuslim_app[categoryUid]
+                            }
+                            additionalGetParameters {
+                                tx_hisnulmuslim_app.controller = App
+                                tx_hisnulmuslim_app.action = list
+                            }
+                        }
+                    }
+                }
+                chapters {
+                    provider = Webzadev\Hisnulmuslim\Seo\XmlSitemap\ChapterXmlSitemapDataProvider
+                    config {
+                        table = tx_hisnulmuslim_domain_model_chapter
+                        sortField = sorting
+                        changeFreqField = monthly
+                        pid = 24
+                        recursive = 0
+                        url {
+                            pageId = 1
+                            fieldToParameterMap {
+                                uid = tx_hisnulmuslim_app[chapterUid]
+                                category_uid = tx_hisnulmuslim_app[categoryUid]
+                            }
+                            additionalGetParameters {
+                                tx_hisnulmuslim_app.controller = App
+                                tx_hisnulmuslim_app.action = chapter
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }

@@ -1,0 +1,68 @@
+base: 'https://www.hisnulmuslim.de/'
+languages:
+  -
+    title: Deutsch
+    enabled: true
+    locale: de_DE.UTF-8
+    hreflang: de-DE
+    base: /
+    websiteTitle: ''
+    navigationTitle: Deutsch
+    flag: de
+    languageId: 0
+rootPageId: 1
+routeEnhancers:
+  PageTypeSuffix:
+    type: PageType
+    map:
+      sitemap.xml: 1533906435
+  Sitemap:
+    type: Simple
+    routePath: '{sitemap}'
+    aspects:
+      sitemap:
+        type: StaticValueMapper
+        map:
+          pages: pages
+          categories: categories
+          chapters: chapters
+  HisnulMuslimApp:
+    type: Extbase
+    limitToPages:
+      - 1
+    extension: Hisnulmuslim
+    plugin: App
+    routes:
+      -
+        routePath: '/{categoryUid}'
+        _controller: 'App::list'
+        _arguments:
+          category_slug: categoryUid
+      -
+        routePath: '/{categoryUid}/dua/{chapterUid}'
+        _controller: 'App::list'
+        _arguments:
+          category_slug: categoryUid
+          chapter_slug: chapterUid
+      -
+        routePath: '/dua/{chapterUid}'
+        _controller: 'App::chapter'
+        _arguments:
+          chapter_slug: chapterUid
+      -
+        routePath: '/{categoryUid}/dua/{chapterUid}'
+        _controller: 'App::show'
+        _arguments:
+          category_slug: categoryUid
+          chapter_slug: chapterUid
+    defaultController: 'App::index'
+    aspects:
+      category_slug:
+        type: PersistedAliasMapper
+        tableName: sys_category
+        routeFieldName: slug
+      chapter_slug:
+        type: PersistedAliasMapper
+        tableName: tx_hisnulmuslim_domain_model_chapter
+        routeFieldName: slug
+websiteTitle: 'Hisnul Muslim'

@@ -220,4 +220,24 @@ class AppController extends ActionController
         return $this->htmlResponse();
     }
 
+    /**
+     * Chapter action
+     *
+     * @param Chapter $chapter The chapter to be shown
+     * @return string The rendered HTML string
+     */
+    public function chapterAction(int $chapterUid = 0): ResponseInterface
+    {
+        // Alle Top-Kategorien holen
+        $topCategories = $this->categoryRepository->findTopLevel();
+
+        if ($chapterUid > 0) {
+            $chapter = $this->chapterRepository->findByUid($chapterUid);
+            $this->view->assign('chapter', $chapter);
+        }
+
+        $this->view->assign('topCategories', $topCategories);
+
+        return $this->htmlResponse();
+    }
 }

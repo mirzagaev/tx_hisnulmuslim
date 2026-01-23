@@ -113,6 +113,58 @@ $(document).ready(function() {
         return false;
     });
 
+    // AJAX für Footer-Links
+    $("footer > ul > li > a").on("click", function(e) {
+        e.preventDefault();
+        
+        const $link = $(this);
+        const pageTitle = $link.text();
+        const ajaxUrl = $link.data('ajax-url');
+        const targetUrl = $link.attr('href');
+        
+        if (!ajaxUrl) return true;
+
+        currentDuaURL = targetUrl;
+        
+        // Titel im Drawer setzen
+        $("#drawer-title").text(pageTitle);
+        
+        // Loading State
+        $("#drawer-content").html('<div class="bittgebeteloading">'+
+            '<div>'+
+                '<div class="h-8 mb-3 lg:w-4/5"></div>'+
+                '<div class="h-10 mb-3"></div>'+
+                '<div class="h-5 lg:w-3/5"></div>'+
+            '</div>'+
+        '</div>');
+        
+        // Drawer öffnen
+        $("#cart-drawer").removeClass("translate-x-full");
+        $("#cart-overlay").removeClass("hidden");
+        
+        // History State
+        history.pushState({ drawerOpen: true, duaUrl: targetUrl }, '', targetUrl);
+        isDrawerOpen = true; 
+        
+        // Ajax-Request
+        $.ajax({
+            url: ajaxUrl,
+            method: 'GET',
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest'
+            },
+            success: function(data) {
+                $("#drawer-content").html(data);
+                $("#drawer-content").scrollTop(0);
+            },
+            error: function(xhr, status, error) {
+                showError('Fehler beim Laden der Seite: ' + error);
+            }
+        });
+        
+        return false;
+    });
+
     // Drawer schließen - KEIN Leeren hier!
     $("#cart-overlay, #closeDrawer").on("click", function() {
         $("#cart-drawer").addClass("translate-x-full");
@@ -162,6 +214,9 @@ $(document).ready(function() {
 
     $(document).on("click", '.close-share-modal', function(e) {
         e.preventDefault();
+        if (document.activeElement instanceof HTMLElement) {
+            document.activeElement.blur();
+        }
         $("#share-modal").addClass("hidden");
         $("#share-modal").removeClass("flex");
         $("#share-modal").attr("aria-hidden", "true");

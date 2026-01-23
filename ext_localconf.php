@@ -50,9 +50,9 @@ ExtensionUtility::configurePlugin(
     'Hisnulmuslim', // <== Dein extKey mit Vendor in composer.json abgleichen
     'App',
     [
-        AppController::class => 'index, list, show, search'
+        AppController::class => 'index, list, chapter, show, search'
     ],
     [
-        AppController::class => 'index, list, show, search'
+        AppController::class => 'index, list, chapter, show, search'
     ]
 );

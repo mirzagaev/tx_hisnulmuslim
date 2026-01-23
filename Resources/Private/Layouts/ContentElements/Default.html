@@ -1,0 +1,15 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<f:if condition="{data.CType} == 'textmedia' || {data.CType} == 'header' || {data.CType} == 'html'">
+    <f:then>
+        <f:render section="Header" optional="true" />
+        <f:render section="Main" />
+    </f:then>
+    <f:else>
+        <div id="c{data.uid}" class="frame frame-default frame-type-{data.CType} frame-layout-{data.layout}">
+            <a id="c{data.uid}"></a>
+            <f:render section="Header" optional="true" />
+            <f:render section="Main" />
+        </div>
+    </f:else>
+</f:if>
+</html>
