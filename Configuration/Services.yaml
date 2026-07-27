@@ -15,3 +15,8 @@ services:
     resource: '../Classes/Controller/*'
     public: true
     tags: ['controller.service_arguments']
+
+  # Middlewares werden vom Core über die Klasse aus dem Container geholt und müssen public sein
+  Webzadev\Hisnulmuslim\Middleware\:
+    resource: '../Classes/Middleware/*'
+    public: true
